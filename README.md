@@ -1,6 +1,6 @@
 ## PHP Quran
 
-[![Build Status](https://travis-ci.org/faizshukri/phpquran.svg)](https://travis-ci.org/faizshukri/quran)
+[![Build Status](https://travis-ci.org/faizshukri/phpquran.svg)](https://travis-ci.org/faizshukri/phpquran)
 [![Total Downloads](https://poser.pugx.org/faizshukri/phpquran/d/total.svg)](https://packagist.org/packages/faizshukri/phpquran)
 [![Latest Stable Version](https://poser.pugx.org/faizshukri/phpquran/v/stable.svg)](https://packagist.org/packages/faizshukri/phpquran)
 [![License](https://poser.pugx.org/faizshukri/phpquran/license.svg)](https://packagist.org/packages/faizshukri/phpquran)
