@@ -21,6 +21,7 @@ class XML
         $result = [];
 
         while(list( , $node) = each($xpathResult)) {
+            $node = (array) $node;
             $verse = current($node);
             $result[$verse['index']] = $verse['text'];
         }
