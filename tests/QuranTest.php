@@ -13,25 +13,25 @@ class QuranTest extends PHPUnit_Framework_TestCase
 
     public function test_single_ayah()
     {
-        $this->assertEquals($this->quran->text('1:3')[3], 'ٱلرَّحْمَٰنِ ٱلرَّحِيمِ');
+        $this->assertEquals('ٱلرَّحْمَٰنِ ٱلرَّحِيمِ', $this->quran->text('1:3')[3]);
     }
 
     public function test_single_ayah_translation()
     {
-        $this->assertEquals($this->quran->translation('en.yusufali')->text('1:3')[3], 'Most Gracious, Most Merciful;');
+        $this->assertEquals('The Entirely Merciful, the Especially Merciful,', $this->quran->translation('en.sahih')->text('1:3')[3]);
     }
 
     public function test_single_ayah_translation_short()
     {
-        $this->assertEquals($this->quran->translation('en')->text('1:3')[3], 'Most Gracious, Most Merciful;');
+        $this->assertEquals('The Entirely Merciful, the Especially Merciful,', $this->quran->translation('en')->text('1:3')[3]);
     }
 
     public function test_single_ayah_multiple_translation()
     {
         $res = $this->quran->translation(['ar', 'en'])->text('1:3');
 
-        $this->assertEquals($res['ar'][3], 'ٱلرَّحْمَٰنِ ٱلرَّحِيمِ');
-        $this->assertEquals($res['en'][3], 'Most Gracious, Most Merciful;');
+        $this->assertEquals('ٱلرَّحْمَٰنِ ٱلرَّحِيمِ', $res['ar'][3]);
+        $this->assertEquals('The Entirely Merciful, the Especially Merciful,', $res['en'][3]);
     }
 
     public function test_multiple_ayah()

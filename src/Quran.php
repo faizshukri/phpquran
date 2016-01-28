@@ -5,7 +5,7 @@ namespace FaizShukri\Quran;
 class Quran
 {
     private $config = [
-        "storage_path" => __DIR__ . '/../data',
+        "storage_path" => 'data',
         "translations" => ["en.sahih"],
     ];
 
