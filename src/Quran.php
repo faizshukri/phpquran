@@ -15,7 +15,7 @@ class Quran
 
         // If function storage_path is exist (laravel), we update the path to laravel's storage path
         if (function_exists('storage_path')) {
-            $this->config['storage_path'] = storage_path( $this->config['storage_path'] );
+            $this->config['storage_path'] = storage_path( 'app' . DIRECTORY_SEPARATOR . $this->config['storage_path'] );
         }
 
         $this->initialize();

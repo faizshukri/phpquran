@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Set storage path where all translation will be stored.
-    | Absolute path will be created inside /storage/app directory.
+    | This path will be created inside /storage/app directory.
     |
     */
 
