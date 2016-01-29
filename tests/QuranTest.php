@@ -13,22 +13,22 @@ class QuranTest extends PHPUnit_Framework_TestCase
 
     public function test_single_ayah()
     {
-        $this->assertEquals('ٱلرَّحْمَٰنِ ٱلرَّحِيمِ', $this->quran->text('1:3'));
+        $this->assertEquals('ٱلرَّحْمَٰنِ ٱلرَّحِيمِ', $this->quran->get('1:3'));
     }
 
     public function test_single_ayah_translation()
     {
-        $this->assertEquals('The Entirely Merciful, the Especially Merciful,', $this->quran->translation('en.sahih')->text('1:3'));
+        $this->assertEquals('The Entirely Merciful, the Especially Merciful,', $this->quran->translation('en.sahih')->get('1:3'));
     }
 
     public function test_single_ayah_translation_short()
     {
-        $this->assertEquals('The Entirely Merciful, the Especially Merciful,', $this->quran->translation('en')->text('1:3'));
+        $this->assertEquals('The Entirely Merciful, the Especially Merciful,', $this->quran->translation('en')->get('1:3'));
     }
 
     public function test_single_ayah_multiple_translation()
     {
-        $res = $this->quran->translation(['ar', 'en'])->text('1:3');
+        $res = $this->quran->translation(['ar', 'en'])->get('1:3');
 
         $this->assertEquals('ٱلرَّحْمَٰنِ ٱلرَّحِيمِ', $res['ar']);
         $this->assertEquals('The Entirely Merciful, the Especially Merciful,', $res['en']);
@@ -36,7 +36,7 @@ class QuranTest extends PHPUnit_Framework_TestCase
 
     public function test_single_ayah_multiple_translation_short()
     {
-        $res = $this->quran->translation('ar,en')->text('1:3');
+        $res = $this->quran->translation('ar,en')->get('1:3');
 
         $this->assertEquals('ٱلرَّحْمَٰنِ ٱلرَّحِيمِ', $res['ar']);
         $this->assertEquals('The Entirely Merciful, the Especially Merciful,', $res['en']);
@@ -44,12 +44,12 @@ class QuranTest extends PHPUnit_Framework_TestCase
 
     public function test_multiple_ayah()
     {
-        $this->assertCount(3, $this->quran->text('1:3,4,5'));
+        $this->assertCount(3, $this->quran->get('1:3,4,5'));
     }
 
     public function test_multiple_ayah_multiple_translation()
     {
-        $res = $this->quran->translation('ar,en')->text('1:3,4,5');
+        $res = $this->quran->translation('ar,en')->get('1:3,4,5');
 
         $this->assertCount(3, $res['ar']);
         $this->assertCount(3, $res['en']);
@@ -57,12 +57,12 @@ class QuranTest extends PHPUnit_Framework_TestCase
 
     public function test_range_ayah()
     {
-        $this->assertCount(3, $this->quran->text('1:3-5'));
+        $this->assertCount(3, $this->quran->get('1:3-5'));
     }
 
     public function test_range_ayah_translation()
     {
-        $res = $this->quran->translation('ar,en')->text('1:3-5');
+        $res = $this->quran->translation('ar,en')->get('1:3-5');
 
         $this->assertCount(3, $res['ar']);
         $this->assertCount(3, $res['en']);
@@ -70,12 +70,12 @@ class QuranTest extends PHPUnit_Framework_TestCase
 
     public function test_mix_ayah()
     {
-        $this->assertCount(4, $this->quran->text('1:2,4-6'));
+        $this->assertCount(4, $this->quran->get('1:2,4-6'));
     }
 
     public function test_mix_ayah_translation()
     {
-        $res = $this->quran->translation('ar,en')->text('1:2, 4-6');
+        $res = $this->quran->translation('ar,en')->get('1:2, 4-6');
 
         $this->assertCount(4, $res['ar']);
         $this->assertCount(4, $res['en']);
@@ -83,7 +83,7 @@ class QuranTest extends PHPUnit_Framework_TestCase
 
     public function test_mix_ayah_translation_sort()
     {
-        $res = $this->quran->translation('ar,en')->text('2:4-6,8,11-13,2');
+        $res = $this->quran->translation('ar,en')->get('2:4-6,8,11-13,2');
 
         $this->assertCount(8, $res['ar']);
         $this->assertCount(8, $res['en']);

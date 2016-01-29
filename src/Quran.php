@@ -50,7 +50,7 @@ class Quran
         return $this;
     }
 
-    public function text($args)
+    public function get($args)
     {
         $args = explode(':', $args);
         $result = [];
