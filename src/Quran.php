@@ -4,16 +4,15 @@ namespace FaizShukri\Quran;
 
 class Quran
 {
-    private $config = [
-        "storage_path" => 'data',
-        "translations" => ["en.sahih"],
-    ];
+    private $config;
 
     private $translations = ['ar'];
 
     public function __construct(array $config = array())
     {
-        $this->config = array_merge($this->config, $config);
+        $initial_config = include 'config/quran.php';
+
+        $this->config = array_merge($initial_config, $config);
         $this->initialize();
     }
 

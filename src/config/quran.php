@@ -7,16 +7,21 @@ return [
     | Storage path
     |--------------------------------------------------------------------------
     |
-    | Set storage path where all translation will be stored
+    | Set storage path where all translation will be stored.
+    | Absolute path will be created inside /storage/app directory.
     |
     */
 
-    "storage_path" => "storage/app/quran",
+    "storage_path" => "quran",
 
     /*
     |--------------------------------------------------------------------------
     | Translations provided by tanzil
     |--------------------------------------------------------------------------
+    |
+    | Set translations that will be available for this package. Translations
+    | need to be downloaded first before used. You can set multi translations
+    | using array below.
     |
     | Supported:
     |
@@ -134,5 +139,5 @@ return [
     |
     */
 
-    "translations" => ["en.sahih"],
+    "translations" => ["en.sahih", "ms.basmeih"],
 ];
