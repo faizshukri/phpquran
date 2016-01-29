@@ -139,5 +139,5 @@ return [
     |
     */
 
-    "translations" => ["en.sahih", "ms.basmeih"],
+    "translations" => ["en.sahih"],
 ];

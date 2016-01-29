@@ -1,6 +1,7 @@
 <?php
 
 use FaizShukri\Quran\Quran;
+use FaizShukri\Quran\Exceptions\TranslationNotExists;
 
 class QuranTest extends PHPUnit_Framework_TestCase
 {
@@ -98,5 +99,13 @@ class QuranTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('11', key($res)); next($res);
         $this->assertEquals('12', key($res)); next($res);
         $this->assertEquals('13', key($res));
+    }
+
+    /**
+     * @expectedException \FaizShukri\Quran\Exceptions\TranslationNotExists
+     */
+    public function test_exception()
+    {
+        $this->quran->translation('ms')->get('1:3');
     }
 }

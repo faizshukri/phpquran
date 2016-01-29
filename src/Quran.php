@@ -2,6 +2,8 @@
 
 namespace FaizShukri\Quran;
 
+use FaizShukri\Quran\Exceptions\TranslationNotExists;
+
 class Quran
 {
     private $config;
@@ -68,6 +70,8 @@ class Quran
             if(!file_exists($xmlFile)){
                 $xmlFile = $this->firstMatchAvailableTranslation($translation);
             }
+
+            if(!$xmlFile) throw new TranslationNotExists("Translation " . $translation . " didn't exists. Please check your config.");
 
             $xml = new XML( $xmlFile );
             $res = $xml->find($args[0], $this->parseSurah($args[1]));
