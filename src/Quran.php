@@ -17,7 +17,7 @@ class Quran
         $this->initialize();
     }
 
-    public function initialize()
+    private function initialize()
     {
         // If original quran not exist in storage_path, copy one
         $source = __DIR__ . '/../data/ar.quran.xml';
@@ -70,7 +70,7 @@ class Quran
             $result[$translation] = $res;
         }
 
-        return (sizeof($result) > 1) ? $this->sortArray($result) : $this->sortArray($result[ key($result) ]) ;
+        return $this->minimize($result);
     }
 
     public function config($val)
@@ -85,6 +85,8 @@ class Quran
         foreach ($dir as $fileinfo) {
             if (!$fileinfo->isDot()) {
                 $filename = $fileinfo->getFilename();
+
+                // If match the first file with translation prefix, return it
                 $yes = preg_match('/^'.$translation.'/', $filename);
                 if($yes === 1) return $this->config('storage_path') . '/' . $filename;
             }
@@ -100,7 +102,11 @@ class Quran
         foreach(explode(',', $surah) as $comma){
 
             $dash = explode('-', $comma);
+
+            // Single ayah, just push it into array.
             if(sizeof($dash) === 1) array_push($result, intval($dash[0]));
+
+            // Range ayah, so we create all ayah in between.
             else for($i = $dash[0]; $i <= $dash[1]; $i++) array_push($result, intval($i));
         }
 
@@ -111,6 +117,24 @@ class Quran
     {
         ksort($arr, SORT_NUMERIC);
         return $arr;
+    }
+
+    private function minimize(array $array)
+    {
+        foreach($array as $key => $translation){
+
+            // If one ayah is requested, we remove it's key
+            if(sizeof($translation) === 1)
+                $array[$key] = $translation[key($translation)];
+
+            // Else we maintain current format, but in sorted form
+            else
+                $array[$key] = $this->sortArray($translation);
+        }
+
+        // If one translation is requested, we remove it's key.
+        // Else just return the current format
+        return (sizeof($array) > 1) ? $array : $array[ key($array) ] ;
     }
 
 }
