@@ -7,13 +7,6 @@ use Illuminate\Support\ServiceProvider;
 class QuranServiceProvider extends ServiceProvider
 {
     /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = true;
-
-    /**
      * Register bindings in the container.
      *
      * @return void
@@ -25,6 +18,10 @@ class QuranServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(Quran::class, function($app){
+            return new Quran($app['config']['quran']);
+        });
+
+        $this->app->bind('quran', function($app){
             return new Quran($app['config']['quran']);
         });
     }
