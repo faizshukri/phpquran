@@ -34,6 +34,14 @@ class QuranTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('The Entirely Merciful, the Especially Merciful,', $res['en']);
     }
 
+    public function test_single_ayah_multiple_translation_short()
+    {
+        $res = $this->quran->translation('ar,en')->text('1:3');
+
+        $this->assertEquals('ٱلرَّحْمَٰنِ ٱلرَّحِيمِ', $res['ar']);
+        $this->assertEquals('The Entirely Merciful, the Especially Merciful,', $res['en']);
+    }
+
     public function test_multiple_ayah()
     {
         $this->assertCount(3, $this->quran->text('1:3,4,5'));
@@ -41,7 +49,7 @@ class QuranTest extends PHPUnit_Framework_TestCase
 
     public function test_multiple_ayah_multiple_translation()
     {
-        $res = $this->quran->translation(['ar', 'en'])->text('1:3,4,5');
+        $res = $this->quran->translation('ar,en')->text('1:3,4,5');
 
         $this->assertCount(3, $res['ar']);
         $this->assertCount(3, $res['en']);
@@ -54,7 +62,7 @@ class QuranTest extends PHPUnit_Framework_TestCase
 
     public function test_range_ayah_translation()
     {
-        $res = $this->quran->translation(['ar', 'en'])->text('1:3-5');
+        $res = $this->quran->translation('ar,en')->text('1:3-5');
 
         $this->assertCount(3, $res['ar']);
         $this->assertCount(3, $res['en']);
@@ -67,7 +75,7 @@ class QuranTest extends PHPUnit_Framework_TestCase
 
     public function test_mix_ayah_translation()
     {
-        $res = $this->quran->translation(['ar', 'en'])->text('1:2, 4-6');
+        $res = $this->quran->translation('ar,en')->text('1:2, 4-6');
 
         $this->assertCount(4, $res['ar']);
         $this->assertCount(4, $res['en']);
@@ -75,7 +83,7 @@ class QuranTest extends PHPUnit_Framework_TestCase
 
     public function test_mix_ayah_translation_sort()
     {
-        $res = $this->quran->translation(['ar', 'en'])->text('2:4-6,8,11-13,2');
+        $res = $this->quran->translation('ar,en')->text('2:4-6,8,11-13,2');
 
         $this->assertCount(8, $res['ar']);
         $this->assertCount(8, $res['en']);

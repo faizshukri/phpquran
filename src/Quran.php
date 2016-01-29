@@ -45,7 +45,7 @@ class Quran
         if(is_array($translations))
             $this->translations = $translations;
         else
-            $this->translations = [ $translations ];
+            $this->translations = explode(',', str_replace(' ', '', $translations));
 
         return $this;
     }
