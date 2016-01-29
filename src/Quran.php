@@ -10,9 +10,14 @@ class Quran
 
     public function __construct(array $config = array())
     {
-        $initial_config = include 'config/quran.php';
+        // Merge our config with user config
+        $this->config = array_merge((include __DIR__ . '/config/quran.php'), $config);
 
-        $this->config = array_merge($initial_config, $config);
+        // If function storage_path is exist (laravel), we update the path to laravel's storage path
+        if (function_exists('storage_path')) {
+            $this->config['storage_path'] = storage_path( $this->config['storage_path'] );
+        }
+
         $this->initialize();
     }
 
