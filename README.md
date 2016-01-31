@@ -88,11 +88,36 @@ $quran->translation('en')->get('1:3'); // The Entirely Merciful, the Especially 
 PHP Quran can be used in console like this.
 
 ```bash
-$ quran 1:2,4-5 en
+$ quran 1:2
+# ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ
 
+
+$ quran 1:2,4-5 en
 # [ 2 ]	[All] praise is [due] to Allah, Lord of the worlds -
 # [ 4 ]	Sovereign of the Day of Recompense.
 # [ 5 ]	It is You we worship and You we ask for help.
+
+
+$ quran 1:2 ar,en
+# [ AR ]	ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ
+# [ EN ]	[All] praise is [due] to Allah, Lord of the worlds -
+
+$ quran 1:2-4 ar,en
+#
+# AR
+# ====
+#
+# [ 2 ]	ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ
+# [ 3 ]	ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+# [ 4 ]	مَٰلِكِ يَوْمِ ٱلدِّينِ
+#
+#
+# EN
+# ====
+#
+# [ 2 ]	[All] praise is [due] to Allah, Lord of the worlds -
+# [ 3 ]	The Entirely Merciful, the Especially Merciful,
+# [ 4 ]	Sovereign of the Day of Recompense.
 
 ```
 
