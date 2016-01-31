@@ -100,6 +100,11 @@ class QuranTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('13', key($res));
     }
 
+    public function test_multiple_ayah_mix_error()
+    {
+        $this->assertCount(4, $this->quran->get('1:s,2,a,4-6,b'));
+    }
+
     /**
      * @expectedException \FaizShukri\Quran\Exceptions\TranslationNotExists
      */
@@ -119,8 +124,33 @@ class QuranTest extends PHPUnit_Framework_TestCase
     /**
      * @expectedException \FaizShukri\Quran\Exceptions\AyahNotProvided
      */
-    public function test_exception_ayah_not_provided2()
+    public function test_exception_ayah_not_provided_2()
     {
         $this->quran->get("2");
     }
+
+    /**
+     * @expectedException \FaizShukri\Quran\Exceptions\WrongArgument
+     */
+    public function test_exception_wrong_argument()
+    {
+        $this->quran->get("w:a");
+    }
+
+    /**
+     * @expectedException \FaizShukri\Quran\Exceptions\WrongArgument
+     */
+    public function test_exception_wrong_argument_2()
+    {
+        $this->quran->get("1:a");
+    }
+
+    /**
+     * @expectedException \FaizShukri\Quran\Exceptions\WrongArgument
+     */
+    public function test_exception_wrong_argument_3()
+    {
+        $this->quran->get("a:1");
+    }
+
 }

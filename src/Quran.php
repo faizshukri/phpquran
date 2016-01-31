@@ -4,6 +4,7 @@ namespace FaizShukri\Quran;
 
 use FaizShukri\Quran\Exceptions\AyahNotProvided;
 use FaizShukri\Quran\Exceptions\TranslationNotExists;
+use FaizShukri\Quran\Exceptions\WrongArgument;
 
 class Quran
 {
@@ -76,8 +77,14 @@ class Quran
 
             if(!$xmlFile) throw new TranslationNotExists("Translation " . $translation . " didn't exists. Please check your config.");
 
+            // Parse ayah arguments into array of ayah
+            $ayah = $this->parseSurah($args[1]);
+
+            // Check if Surah and Ayah is in correct format
+            if( !is_numeric($args[0]) || sizeof($ayah) === 0 ) throw new WrongArgument("Surah / Ayah format was incorrect. Please try again.");
+
             $xml = new XML( $xmlFile );
-            $res = $xml->find($args[0], $this->parseSurah($args[1]));
+            $res = $xml->find($args[0], $ayah);
             $result[$translation] = $res;
         }
 
@@ -113,6 +120,9 @@ class Quran
         foreach(explode(',', $surah) as $comma){
 
             $dash = explode('-', $comma);
+
+            // Skip any invalid ayah
+            if(!is_numeric($dash[0]) || (isset($dash[1]) && !is_numeric($dash[1]))) continue;
 
             // Single ayah, just push it into array.
             if(sizeof($dash) === 1) array_push($result, intval($dash[0]));

@@ -18,7 +18,7 @@ class QuranCommand
             return $this->parseResult($ayah) . "\n";
 
         } catch(Exception $e) {
-            return "Error: " . $e->getMessage() . "\n";
+            return "Error: " . $e->getMessage() . "\n\n";
         }
     }
 
