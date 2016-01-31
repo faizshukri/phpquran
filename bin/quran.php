@@ -57,6 +57,11 @@ class QuranCommand
         return $result;
     }
 
+    private function updateTranslation($translation)
+    {
+
+    }
+
 }
 
 $command = new QuranCommand;

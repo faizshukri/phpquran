@@ -94,7 +94,10 @@ $quran->translation('en')->get('1:3');
 // The Entirely Merciful, the Especially Merciful,
 
 $quran->translation('ar,en')->get('1:3');
-// [ 'ٱلرَّحْمَٰنِ ٱلرَّحِيمِ', 'The Entirely Merciful, the Especially Merciful,' ]
+// [
+//   "ar" => "ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
+//   "en" => "The Entirely Merciful, the Especially Merciful,"
+// ]
 
 $quran->translation('ar,en')->get('1:2,3');
 // [
