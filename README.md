@@ -64,6 +64,13 @@ By default, the app will download and store quran files in `storage/app/quran` d
 
 Specify what translation you want to make available for use. Made sure you have added translation here before use in the code.
 
+### Console
+
+PHP Quran also ship a binary file to be used in console. If you want to access it anywhere, you can install PHP Quran globally and put your composer global directory path to your working environment's `$PATH`.
+
+```bash
+$ composer global require faizshukri/phpquran
+```
 
 ## Usage
 
@@ -76,6 +83,18 @@ $quran->get('1:3'); // ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
 $quran->translation('en')->get('1:3'); // The Entirely Merciful, the Especially Merciful,
 ```
 
+### Console
+
+PHP Quran can be used in console like this.
+
+```bash
+$ quran 1:2,4-5 en
+
+# [ 2 ]	[All] praise is [due] to Allah, Lord of the worlds -
+# [ 4 ]	Sovereign of the Day of Recompense.
+# [ 5 ]	It is You we worship and You we ask for help.
+
+```
 
 ## License
 

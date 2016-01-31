@@ -103,8 +103,24 @@ class QuranTest extends PHPUnit_Framework_TestCase
     /**
      * @expectedException \FaizShukri\Quran\Exceptions\TranslationNotExists
      */
-    public function test_exception()
+    public function test_exception_translation_not_exists()
     {
         $this->quran->translation('ms')->get('1:3');
+    }
+
+    /**
+     * @expectedException \FaizShukri\Quran\Exceptions\AyahNotProvided
+     */
+    public function test_exception_ayah_not_provided()
+    {
+        $this->quran->get("");
+    }
+
+    /**
+     * @expectedException \FaizShukri\Quran\Exceptions\AyahNotProvided
+     */
+    public function test_exception_ayah_not_provided2()
+    {
+        $this->quran->get("2");
     }
 }

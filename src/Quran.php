@@ -2,6 +2,7 @@
 
 namespace FaizShukri\Quran;
 
+use FaizShukri\Quran\Exceptions\AyahNotProvided;
 use FaizShukri\Quran\Exceptions\TranslationNotExists;
 
 class Quran
@@ -60,6 +61,8 @@ class Quran
     {
         $args = explode(':', $args);
         $result = [];
+
+        if(sizeof($args) <= 1) throw new AyahNotProvided("Ayah argument was not provided. Give at least one ayah from a surah.");
 
         // Get text for all translation
         foreach($this->translations as $translation){
