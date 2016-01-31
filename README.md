@@ -8,6 +8,8 @@ PHP Quran was created by, and is maintained by [Faiz Shukri](https://github.com/
 [![Build Status](https://travis-ci.org/faizshukri/phpquran.svg)](https://travis-ci.org/faizshukri/phpquran)
 [![Total Downloads](https://poser.pugx.org/faizshukri/phpquran/d/total.svg)](https://packagist.org/packages/faizshukri/phpquran)
 [![Latest Stable Version](https://poser.pugx.org/faizshukri/phpquran/v/stable.svg)](https://packagist.org/packages/faizshukri/phpquran)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/faizshukri/phpquran/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/faizshukri/phpquran/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/faizshukri/phpquran/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/faizshukri/phpquran/?branch=master)
 [![License](https://poser.pugx.org/faizshukri/phpquran/license.svg)](https://packagist.org/packages/faizshukri/phpquran)
 
 ## Installation
