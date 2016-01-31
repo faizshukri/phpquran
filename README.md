@@ -79,8 +79,35 @@ use FaizShukri\Quran\Quran;
 
 $quran = new Quran();
 
-$quran->get('1:3'); // ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
-$quran->translation('en')->get('1:3'); // The Entirely Merciful, the Especially Merciful,
+$quran->get('1:3');
+// ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+
+$quran->get('1:2,4-6');
+// [
+//   2 => "ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ",
+//   4 => "مَٰلِكِ يَوْمِ ٱلدِّينِ",
+//   5 => "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
+//   6 => "ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ"
+// ]
+
+$quran->translation('en')->get('1:3');
+// The Entirely Merciful, the Especially Merciful,
+
+$quran->translation('ar,en')->get('1:3');
+// [ 'ٱلرَّحْمَٰنِ ٱلرَّحِيمِ', 'The Entirely Merciful, the Especially Merciful,' ]
+
+$quran->translation('ar,en')->get('1:2,3');
+// [
+//   "ar" => [
+//     2 => "ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ",
+//     3 => "ٱلرَّحْمَٰنِ ٱلرَّحِيمِ"
+//   ],
+//   "en" => [
+//     2 => "[All] praise is [due] to Allah, Lord of the worlds -",
+//     3 => "The Entirely Merciful, the Especially Merciful,"
+//   ]
+// ]
+
 ```
 
 ### Console
@@ -91,12 +118,10 @@ PHP Quran can be used in console like this.
 $ quran 1:2
 # ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ
 
-
 $ quran 1:2,4-5 en
 # [ 2 ]	[All] praise is [due] to Allah, Lord of the worlds -
 # [ 4 ]	Sovereign of the Day of Recompense.
 # [ 5 ]	It is You we worship and You we ask for help.
-
 
 $ quran 1:2 ar,en
 # [ AR ]	ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ
