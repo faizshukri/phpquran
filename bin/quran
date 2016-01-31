@@ -1,7 +1,8 @@
 #!/usr/bin/php
 <?php
 
-require_once(realpath('vendor/autoload.php'));
+if(file_exists(__DIR__ . '/../vendor/autoload.php')) require_once(realpath(__DIR__ . '/../vendor/autoload.php'));
+else require_once(realpath(__DIR__ . '/../../../autoload.php'));
 
 use FaizShukri\Quran\Quran;
 
@@ -9,7 +10,7 @@ class QuranCommand
 {
     public function execute(array $args)
     {
-        $quran = new Quran;
+        $quran = new Quran(['storage_path' => __DIR__ . '/../quran']);
 
         try {
             if(isset($args[2])) $quran->translation($args[2]);
