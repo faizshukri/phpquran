@@ -1,7 +1,6 @@
 <?php
 
 use FaizShukri\Quran\Quran;
-use FaizShukri\Quran\Exceptions\TranslationNotExists;
 
 class QuranTest extends PHPUnit_Framework_TestCase
 {

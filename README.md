@@ -34,7 +34,7 @@ In the `$providers` array add the service providers for this package.
 FaizShukri\Quran\QuranServiceProvider::class
 ```
 
-Add the facade of this package to the $aliases array.
+Add the facade of this package to the `$aliases` array.
 
 ```php
 'Quran' => FaizShukri\Quran\Facades\Quran::class
@@ -66,6 +66,15 @@ Specify what translation you want to make available for use. Made sure you have 
 
 
 ## Usage
+
+```php
+use FaizShukri\Quran\Quran;
+
+$quran = new Quran();
+
+$quran->get('1:3'); // ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+$quran->translation('en')->get('1:3'); // The Entirely Merciful, the Especially Merciful,
+```
 
 
 ## License
