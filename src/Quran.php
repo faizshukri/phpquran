@@ -18,7 +18,7 @@ class Quran
         $this->config = array_merge((include realpath(__DIR__ . '/../config/quran.php')), $config);
 
         // If function storage_path is exist (laravel), we update the path to laravel's storage path
-        if (function_exists('storage_path')) {
+        if (function_exists('storage_path') && php_sapi_name() !== 'cli') {
             $this->config['storage_path'] = storage_path( 'app' . DIRECTORY_SEPARATOR . $this->config['storage_path'] );
         }
 
