@@ -4,4 +4,6 @@ namespace FaizShukri\Quran\Exceptions;
 
 use \Exception;
 
-class WrongArgument extends Exception { }
+class WrongArgument extends Exception
+{
+}

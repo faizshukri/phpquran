@@ -13,15 +13,17 @@ class XML
 
     public function find($surah, array $ayah)
     {
-        $xml = new \SimpleXMLElement( $this->xml );
+        $xml = new \SimpleXMLElement($this->xml);
 
-        $xpath = '//sura[@index='.$surah.']/aya['. implode(' or ', array_map(function($a){ return '@index='.$a; }, $ayah)) .']';
+        $xpath = '//sura[@index=' . $surah . ']/aya[' . implode(' or ', array_map(function ($a) {
+                return '@index=' . $a;
+            }, $ayah)) . ']';
 
         $xpathResult = $xml->xpath($xpath);
         $result = [];
 
-        while(list( , $node) = each($xpathResult)) {
-            $node = (array) $node;
+        while (list(, $node) = each($xpathResult)) {
+            $node = (array)$node;
             $verse = current($node);
             $result[$verse['index']] = $verse['text'];
         }

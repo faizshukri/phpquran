@@ -17,11 +17,11 @@ class QuranServiceProvider extends ServiceProvider
             realpath(__DIR__ . '/../config/quran.php'), 'quran'
         );
 
-        $this->app->bind(Quran::class, function($app){
+        $this->app->bind(Quran::class, function ($app) {
             return new Quran($app['config']['quran']);
         });
 
-        $this->app->bind('quran', function($app){
+        $this->app->bind('quran', function ($app) {
             return new Quran($app['config']['quran']);
         });
     }

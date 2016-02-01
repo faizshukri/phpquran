@@ -4,4 +4,6 @@ namespace FaizShukri\Quran\Exceptions;
 
 use \Exception;
 
-class AyahNotProvided extends Exception { }
+class AyahNotProvided extends Exception
+{
+}
