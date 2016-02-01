@@ -47,7 +47,7 @@ class Quran
     /**
      * Set translations to be used
      *
-     * @param array $translation
+     * @param array $translations
      * @return $this
      */
     public function translation($translations)
@@ -80,7 +80,7 @@ class Quran
                 $xmlFile = $this->firstMatchAvailableTranslation($translation);
             }
 
-            if (!$xmlFile) {
+            if ($xmlFile === false) {
                 throw new TranslationNotExists("Translation " . $translation . " didn't exists. Please check your config.");
             }
 
