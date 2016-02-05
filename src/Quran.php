@@ -2,9 +2,11 @@
 
 namespace FaizShukri\Quran;
 
+use FaizShukri\Quran\Repositories\Source\SourceInterface;
 use FaizShukri\Quran\Exceptions\AyahNotProvided;
-use FaizShukri\Quran\Exceptions\TranslationNotExists;
 use FaizShukri\Quran\Exceptions\WrongArgument;
+use FaizShukri\Quran\Repositories\Source\XMLRepository;
+use FaizShukri\Quran\Supports\Config;
 
 class Quran
 {
@@ -12,36 +14,21 @@ class Quran
 
     private $translations = ['ar'];
 
+    private $source;
+
     public function __construct(array $config = array())
     {
-        // Merge our config with user config
-        $this->config = array_merge((include realpath(__DIR__ . '/../config/quran.php')), $config);
+        $this->config = new Config($config);
 
-        // If function storage_path is exist (laravel), we update the path to laravel's storage path
-        if (function_exists('storage_path') && php_sapi_name() !== 'cli') {
-            $this->config['storage_path'] = storage_path('app' . DIRECTORY_SEPARATOR . $this->config['storage_path']);
-        }
-
-        $this->initialize();
+        // By default, source is XML
+        $this->source = new XMLRepository();
     }
 
-    private function initialize()
+    public function setSource(SourceInterface $source)
     {
-        // If original quran not exist in storage_path, copy one
-        $source = __DIR__ . '/../data/ar.quran.xml';
-        $dest = $this->config('storage_path') . '/ar.quran.xml';
-        if (!file_exists($dest)) {
-
-            // If storage path didn't exist, create it
-            if (!file_exists($this->config('storage_path'))) {
-                mkdir($this->config('storage_path'));
-            }
-            copy($source, $dest);
-        }
-
-        // Sync translation files to storage path
-        $dw = new Downloader($this->config);
-        $dw->sync();
+        $this->source = $source;
+        $this->source->setConfig( $this->config );
+        $this->source->initialize();
     }
 
     /**
@@ -73,17 +60,6 @@ class Quran
         // Get text for all translation
         foreach ($this->translations as $translation) {
 
-            $xmlFile = $this->config('storage_path') . '/' . $translation . '.xml';
-
-            // If files not exist, get the first match
-            if (!file_exists($xmlFile)) {
-                $xmlFile = $this->firstMatchAvailableTranslation($translation);
-            }
-
-            if ($xmlFile === false) {
-                throw new TranslationNotExists("Translation " . $translation . " didn't exists. Please check your config.");
-            }
-
             // Parse ayah arguments into array of ayah
             $ayah = $this->parseSurah($args[1]);
 
@@ -92,36 +68,10 @@ class Quran
                 throw new WrongArgument("Surah / Ayah format was incorrect. Please try again.");
             }
 
-            $xml = new XML($xmlFile);
-            $res = $xml->find($args[0], $ayah);
-            $result[$translation] = $res;
+            $result[$translation] = $this->source->getAyah($args[0], $ayah, $translation);
         }
 
         return $this->minimize($result);
-    }
-
-    public function config($val)
-    {
-        return $this->config[$val];
-    }
-
-    private function firstMatchAvailableTranslation($translation)
-    {
-        $dir = new \DirectoryIterator($this->config('storage_path'));
-
-        foreach ($dir as $fileinfo) {
-            if (!$fileinfo->isDot()) {
-                $filename = $fileinfo->getFilename();
-
-                // If match the first file with translation prefix, return it
-                $yes = preg_match('/^' . $translation . '/', $filename);
-                if ($yes === 1) {
-                    return $this->config('storage_path') . '/' . $filename;
-                }
-            }
-        }
-
-        return false;
     }
 
     private function parseSurah($surah)

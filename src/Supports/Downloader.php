@@ -1,6 +1,6 @@
 <?php
 
-namespace FaizShukri\Quran;
+namespace FaizShukri\Quran\Supports;
 
 use GuzzleHttp\Client;
 
@@ -8,17 +8,16 @@ class Downloader
 {
     private $config;
 
-    public function __construct(array $config)
+    public function __construct(Config $config)
     {
         $this->config = $config;
     }
 
-    public function sync()
+    public function sync($type = 'xml')
     {
         // Download quran data
-        foreach ($this->config['translations'] as $tr) {
-            $type = 'xml';
-            $file = $this->config['storage_path'] . '/' . $tr . '.' . $type;
+        foreach ($this->config->get('translations') as $tr) {
+            $file = $this->config->get('storage_path') . '/' . $tr . '.' . $type;
 
             if (!file_exists($file)) {
                 $url = 'http://tanzil.net/trans/?transID=' . $tr . '&type=' . $type;

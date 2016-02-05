@@ -1,6 +1,6 @@
 <?php
 
-namespace FaizShukri\Quran;
+namespace FaizShukri\Quran\Supports;
 
 class XML
 {

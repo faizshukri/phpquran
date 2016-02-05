@@ -1,6 +1,7 @@
 <?php
 
 use FaizShukri\Quran\Quran;
+use FaizShukri\Quran\Repositories\Source\XMLRepository;
 
 class QuranTest extends PHPUnit_Framework_TestCase
 {
@@ -9,6 +10,7 @@ class QuranTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->quran = new Quran();
+        $this->quran->setSource(new XMLRepository());
     }
 
     public function test_single_ayah()
