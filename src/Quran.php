@@ -21,7 +21,7 @@ class Quran
         $this->config = new Config($config);
 
         // By default, source is XML
-        $this->source = new XMLRepository();
+        $this->setSource( new XMLRepository() );
     }
 
     public function setSource(SourceInterface $source)
