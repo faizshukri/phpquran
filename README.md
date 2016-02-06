@@ -118,19 +118,44 @@ $quran->translation('ar,en')->get('1:2,3');
 PHP Quran can be used in console like this.
 
 ```bash
-$ quran ayah 1 2
+
+$ quran surah
+# +------------------+-------------------+--------------------+-------------------+
+# | All surah                                                                     |
+# +------------------+-------------------+--------------------+-------------------+
+# | 1. Al-Faatiha    | 30. Ar-Room       | 59. Al-Hashr       | 87. Al-A'laa      |
+# | 2. Al-Baqara     | 31. Luqman        | 60. Al-Mumtahana   | 88. Al-Ghaashiya  |
+# | 3. Aal-i-Imraan  | 32. As-Sajda      | 61. As-Saff        | 89. Al-Fajr       |
+# ....
+
+$ quran surah 1
+#  =========== =============
+#   Surah Al-Faatiha
+#  =========== =============
+#   Index       1
+#   Name        Al-Faatiha
+#   Name (ar)   الفاتحة
+#   Meaning     The Opening
+#   No. Ayah    7
+#   Start       0
+#   Type        Meccan
+#   Order       5
+#   Rukus       1
+#  =========== =============
+
+$ quran surah 1 2
 # ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ
 
-$ quran ayah 1 2,4-5 en
+$ quran surah 1 2,4-5 en
 # [ 2 ]	[All] praise is [due] to Allah, Lord of the worlds -
 # [ 4 ]	Sovereign of the Day of Recompense.
 # [ 5 ]	It is You we worship and You we ask for help.
 
-$ quran ayah 1 2 ar,en
+$ quran surah 1 2 ar,en
 # [ AR ]	ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ
 # [ EN ]	[All] praise is [due] to Allah, Lord of the worlds -
 
-$ quran ayah 1 2-4 ar,en
+$ quran surah 1 2-4 ar,en
 #
 # AR
 # ====

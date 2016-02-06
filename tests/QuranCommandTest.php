@@ -16,27 +16,27 @@ class QuranCommandTest extends PHPUnit_Framework_TestCase
     public function test_single_ayah()
     {
         $expected = "ٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَٰهُمْ يُنفِقُونَ\n\n";
-        $this->assertEquals($expected, $this->exec('quran ayah 2 3'));
+        $this->assertEquals($expected, $this->exec('quran surah 2 3'));
     }
 
     public function test_single_ayah_translation()
     {
         $expected = "Who believe in the unseen, establish prayer, and spend out of what We have provided for them,\n\n";
-        $this->assertEquals($expected, $this->exec('quran ayah 2 3 en'));
+        $this->assertEquals($expected, $this->exec('quran surah 2 3 en'));
     }
 
     public function test_single_ayah_multi_translation()
     {
         $expected = "[ AR ]\tٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَٰهُمْ يُنفِقُونَ\n" .
                     "[ EN ]\tWho believe in the unseen, establish prayer, and spend out of what We have provided for them,\n\n";
-        $this->assertEquals($expected, $this->exec('quran ayah 2 3 ar,en'));
+        $this->assertEquals($expected, $this->exec('quran surah 2 3 ar,en'));
     }
 
     public function test_multi_ayah_single_translation()
     {
         $expected = "[ 3 ]\tWho believe in the unseen, establish prayer, and spend out of what We have provided for them,\n" . 
                     "[ 4 ]\tAnd who believe in what has been revealed to you, [O Muhammad], and what was revealed before you, and of the Hereafter they are certain [in faith].\n\n";
-        $this->assertEquals($expected, $this->exec('quran ayah 2 3,4 en'));
+        $this->assertEquals($expected, $this->exec('quran surah 2 3,4 en'));
     }
 
     public function test_multi_ayah_multi_translation()
@@ -48,7 +48,7 @@ class QuranCommandTest extends PHPUnit_Framework_TestCase
                     "[ 2 ]\tThis is the Book about which there is no doubt, a guidance for those conscious of Allah -\n" .
                     "[ 3 ]\tWho believe in the unseen, establish prayer, and spend out of what We have provided for them,\n\n";
 
-        $this->assertEquals($expected, $this->exec('quran ayah 2 2,3 ar,en'));
+        $this->assertEquals($expected, $this->exec('quran surah 2 2,3 ar,en'));
     }
 
     // Exec
