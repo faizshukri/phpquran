@@ -1,3 +1,4 @@
 /vendor
-.idea
 /quran
+.idea
+composer.lock
