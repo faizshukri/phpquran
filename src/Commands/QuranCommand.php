@@ -31,47 +31,50 @@ class QuranCommand
 
     public function execute()
     {
-        $this->processFlag();
+        echo $this->processFlag();
 
         if ($this->options->isPipetteEmpty()) {
-            $this->processAyah();
+            echo $this->processAyah();
         }
     }
 
     public function processFlag()
     {
+        $output = "";
+
         while (false !== $c = $this->options->getOption($v)) {
             switch ($c) {
                 case '__ambiguous':
-                    echo "Option `" . $v['option'] . "` does not exists.";
+                    $output = "Option `" . $v['option'] . "` does not exists.";
 
                     if (sizeof($v['solutions']) > 0) {
-                        echo "Do you mean one of below?\n";
-                        echo implode("\n", array_map(function ($opt) {
+                        $output .= "Do you mean one of below?\n";
+                        $output .= implode("\n", array_map(function ($opt) {
                             return " - $opt";
                         }, $v['solutions']));
                     }
+                    $output .= "\n\n";
                     break;
 
                 case 'h':
-                    echo $this->usage();
+                    $output = $this->usage();
                     break;
+
                 case 'v':
-                    echo $this->version();
+                    $output = $this->version();
             }
-            echo "\n\n";
-            return;
+            break;
         }
 
+        return $output;
     }
 
     public function processAyah()
     {
         $this->parser->listInputs($ayah, $translation);
 
-        if(!$ayah && !$translation){
-            echo $this->usage() . "\n\n";
-            return false;
+        if($ayah === null && $translation === null){
+            return $this->usage();
         }
 
         $quran = new Quran();
@@ -82,7 +85,7 @@ class QuranCommand
             }
 
             $ayah = $quran->get($ayah);
-            echo $this->parseResult($ayah) . "\n";
+            return $this->parseResult($ayah) . "\n";
 
         } catch (\Exception $e) {
             return "Error: " . $e->getMessage() . "\n\n";
@@ -101,7 +104,15 @@ class QuranCommand
 
             "Options:" . "\n" .
             "  -h, --help    : This help" . "\n" .
-            "  -v, --version : Show version";
+            "  -v, --version : Show version\n\n";
+    }
+
+    private function version()
+    {
+        $string = file_get_contents(realpath( __DIR__ . '/../../composer.json' ));
+        $json_a = json_decode($string, true);
+
+        return 'Quran-Cli ' . $json_a['version'] . " by Faiz Shukri\n\n";
     }
 
 
@@ -144,13 +155,5 @@ class QuranCommand
             $result .= "[ " . strtoupper($num) . " ]\t" . $aya . "\n";
         }
         return $result;
-    }
-
-    private function version()
-    {
-        $string = file_get_contents(realpath( __DIR__ . '/../../composer.json' ));
-        $json_a = json_decode($string, true);
-
-        return 'Quran-Cli ' . $json_a['version'] . ' by Faiz Shukri';
     }
 }
