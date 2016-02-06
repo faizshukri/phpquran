@@ -56,7 +56,7 @@ class QuranCommand
                     echo $this->usage();
                     break;
                 case 'v':
-                    echo "Quran-Cli v3.2.2 by Faiz Shukri";
+                    echo $this->version();
             }
             echo "\n\n";
         }
@@ -135,5 +135,13 @@ class QuranCommand
             $result .= "[ " . strtoupper($num) . " ]\t" . $aya . "\n";
         }
         return $result;
+    }
+
+    private function version()
+    {
+        $string = file_get_contents(realpath( __DIR__ . '/../../composer.json' ));
+        $json_a = json_decode($string, true);
+
+        return 'Quran-Cli ' . $json_a['version'] . ' by Faiz Shukri';
     }
 }

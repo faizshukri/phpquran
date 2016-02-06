@@ -1,6 +1,7 @@
 {
     "name": "faizshukri/phpquran",
     "description": "Complete PHP Quran Resource",
+    "version": "v0.3.4",
     "license": "MIT",
     "keywords": ["quran", "al-quran", "muslim", "islam", "kitab"],
     "authors": [
