@@ -62,6 +62,13 @@ class XMLRepository implements SourceInterface
         $dw->sync();
     }
 
+    /**
+     * Get the first match xml from translation.
+     *
+     * @param string $translation Translation prefix or short form
+     *
+     * @return string|false String of path to the translation if exists, or false otherwise
+     */
     private function firstMatchAvailableTranslation($translation)
     {
         $dir = new \DirectoryIterator($this->config->get('storage_path'));

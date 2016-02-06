@@ -24,6 +24,11 @@ class Quran
         $this->setSource( new XMLRepository() );
     }
 
+    /**
+     * Set quran source either XML, Sql
+     *
+     * @param \FaizShukri\Quran\Repositories\Source\SourceInterface $source
+     */
     public function setSource(SourceInterface $source)
     {
         $this->source = $source;
@@ -35,7 +40,8 @@ class Quran
      * Set translations to be used
      *
      * @param array $translations
-     * @return $this
+     *
+     * @return self
      */
     public function translation($translations)
     {
@@ -48,6 +54,16 @@ class Quran
         return $this;
     }
 
+    /**
+     * Get ayah.
+     *
+     * @param string $args String of supported format of ayah
+     *
+     * @return string|array Ayah
+     *
+     * @throws AyahNotProvided
+     * @throws WrongArgument
+     */
     public function get($args)
     {
         $args = explode(':', $args);
@@ -74,6 +90,14 @@ class Quran
         return $this->minimize($result);
     }
 
+    /**
+     * Parse the ayah requested of a certain surah. The format of ayah will
+     * be translated into an array or ayah.
+     *
+     * @param string $surah
+     *
+     * @return array Array of ayah
+     */
     private function parseSurah($surah)
     {
         $result = [];
@@ -101,12 +125,26 @@ class Quran
         return $result;
     }
 
+    /**
+     * Sort array in ascending by it's key.
+     *
+     * @param array $arr
+     *
+     * @return array
+     */
     private function sortArray(array $arr)
     {
         ksort($arr, SORT_NUMERIC);
         return $arr;
     }
 
+    /**
+     * Reduce the array level by remove unnecessary parent.
+     *
+     * @param array $array
+     *
+     * @return array
+     */
     private function minimize(array $array)
     {
         foreach ($array as $key => $translation) {
