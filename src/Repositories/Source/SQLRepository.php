@@ -18,19 +18,19 @@ class SQLRepository implements SourceInterface
 
     }
 
-    public function getAllSurah()
+    public function chapters()
     {
-        // TODO: Implement getAllSurah() method.
+        // TODO: Implement chapters() method.
     }
 
-    public function getSurah($surah)
+    public function chapter($chapter)
     {
-        // TODO: Implement getSurah() method.
+        // TODO: Implement chapter() method.
     }
 
-    public function getAyah($surah, $ayah, $translation = 'ar')
+    public function ayah($surah, $ayah, $translation = 'ar')
     {
-        // TODO: Implement getAyah() method.
+        // TODO: Implement ayah() method.
     }
 
 }

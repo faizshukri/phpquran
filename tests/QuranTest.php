@@ -106,6 +106,29 @@ class QuranTest extends PHPUnit_Framework_TestCase
         $this->assertCount(4, $this->quran->get('1:s,2,a,4-6,b'));
     }
 
+    public function test_get_surah()
+    {
+        $chapters = $this->quran->chapters();
+
+        // Make chapters is contain array of 114 element
+        $this->assertCount(114, $chapters);
+
+        // Make sure each element has another 9 variables
+        $this->assertCount(9, (array) $chapters[3]);
+
+        // Randomly check each variable
+        // Variable return as object
+        $this->assertEquals(3, $chapters[3]->index);
+        $this->assertEquals(120, $chapters[5]->ayas);
+        $this->assertEquals(954, $chapters[7]->start);
+        $this->assertEquals("يونس", $chapters[10]->name);
+        $this->assertEquals("Ibrahim", $chapters[14]->tname);
+        $this->assertEquals("The Prophets", $chapters[21]->ename);
+        $this->assertEquals("Medinan", $chapters[24]->type);
+        $this->assertEquals(49, $chapters[28]->order);
+        $this->assertEquals(9, $chapters[33]->rukus);
+    }
+
     /**
      * @expectedException \FaizShukri\Quran\Exceptions\TranslationNotExists
      */

@@ -11,11 +11,11 @@ interface SourceInterface
     public function initialize();
 
     // Information of all surah
-    public function getAllSurah();
+    public function chapters();
 
     // Information of a surah
-    public function getSurah($surah);
+    public function chapter($chapter);
 
     // Get ayah
-    public function getAyah($surah, $ayah, $translation = 'ar');
+    public function ayah($surah, $ayah, $translation = 'ar');
 }

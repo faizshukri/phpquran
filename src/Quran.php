@@ -84,10 +84,20 @@ class Quran
                 throw new WrongArgument("Surah / Ayah format was incorrect. Please try again.");
             }
 
-            $result[$translation] = $this->source->getAyah($args[0], $ayah, $translation);
+            $result[$translation] = $this->source->ayah($args[0], $ayah, $translation);
         }
 
         return $this->minimize($result);
+    }
+
+    /**
+     * Get array of chapters information
+     *
+     * @return array Array of object for each chapter
+     */
+    public function chapters()
+    {
+        return $this->source->chapters();
     }
 
     /**

@@ -16,17 +16,30 @@ class XMLRepository implements SourceInterface
         $this->config = $config;
     }
 
-    public function getAllSurah()
+    public function chapters()
     {
-        // TODO: Implement getAllSurah() method.
+        $xmlFile = $this->config->get('storage_path') . '/quran-data.xml';
+        $xml = new XML($xmlFile);
+        $result = [];
+
+        $xpath = '//suras/sura';
+        $xpathResult = $xml->find($xpath);
+
+        while (list(, $sura) = each($xpathResult)) {
+            $sura = (array)$sura;
+            $sura = current($sura);
+            $result[$sura['index']] = (object) $sura;
+        }
+
+        return $result;
     }
 
-    public function getSurah($surah)
+    public function chapter($chapter)
     {
         // TODO: Implement getSurah() method.
     }
 
-    public function getAyah($surah, $ayah, $translation = 'ar')
+    public function ayah($surah, $ayah, $translation = 'ar')
     {
         $xmlFile = $this->config->get('storage_path') . '/' . $translation . '.xml';
 
@@ -40,21 +53,45 @@ class XMLRepository implements SourceInterface
         }
 
         $xml = new XML($xmlFile);
-        return $xml->find($surah, $ayah);
+        $result = [];
+
+        $xpath = '//sura[@index=' . $surah . ']/aya[' . implode(' or ', array_map(function ($a) {
+                return '@index=' . $a;
+            }, $ayah)) . ']';
+
+        $xpathResult = $xml->find($xpath);
+
+        while (list(, $node) = each($xpathResult)) {
+            $node = (array)$node;
+            $verse = current($node);
+            $result[$verse['index']] = $verse['text'];
+        }
+
+        return $result;
     }
 
     public function initialize()
     {
         // If original quran not exist in storage_path, copy one
-        $source = realpath(__DIR__ . '/../../../data/ar.quran.xml');
-        $dest = $this->config->get('storage_path') . '/ar.quran.xml';
-        if (!file_exists($dest)) {
+        $quran_source = realpath(__DIR__ . '/../../../data/ar.quran.xml');
+        $quran_dest = $this->config->get('storage_path') . '/ar.quran.xml';
 
-            // If storage path didn't exist, create it
-            if (!file_exists($this->config->get('storage_path'))) {
-                mkdir($this->config->get('storage_path'));
-            }
-            copy($source, $dest);
+        $meta_source = realpath(__DIR__ . '/../../../data/quran-data.xml');
+        $meta_dest = $this->config->get('storage_path') . '/quran-data.xml';
+
+        // If storage path didn't exist, create it
+        if (!file_exists($this->config->get('storage_path'))) {
+            mkdir($this->config->get('storage_path'));
+        }
+
+        // Copy quran
+        if (!file_exists($quran_dest)) {
+            copy($quran_source, $quran_dest);
+        }
+
+        // Copy metadata
+        if (!file_exists($meta_dest)) {
+            copy($meta_source, $meta_dest);
         }
 
         // Sync translation files to storage path

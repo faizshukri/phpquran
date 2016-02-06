@@ -11,24 +11,10 @@ class XML
         $this->xml = $this->pathToXML($xmlPath);
     }
 
-    public function find($surah, array $ayah)
+    public function find($xpath)
     {
         $xml = new \SimpleXMLElement($this->xml);
-
-        $xpath = '//sura[@index=' . $surah . ']/aya[' . implode(' or ', array_map(function ($a) {
-                return '@index=' . $a;
-            }, $ayah)) . ']';
-
-        $xpathResult = $xml->xpath($xpath);
-        $result = [];
-
-        while (list(, $node) = each($xpathResult)) {
-            $node = (array)$node;
-            $verse = current($node);
-            $result[$verse['index']] = $verse['text'];
-        }
-
-        return $result;
+        return $xml->xpath($xpath);
     }
 
     public function pathToXML($xmlPath)
