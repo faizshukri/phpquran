@@ -24,7 +24,7 @@ class QuranCommandTest extends PHPUnit_Framework_TestCase
     public function test_flag_order()
     {
         $expected_version = '/^Quran-Cli .* by Faiz Shukri\n$/';
-        $expected_help = '/^Usage:\n  quran (.|\n)* Show version\n\n$/';
+        $expected_help = '/^Usage:\n  quran (.|\n)* List all translation\n$/';
 
         $this->assertRegExp($expected_version, $this->exec('quran -v -h'));
         $this->assertRegExp($expected_help, $this->exec('quran -h -v'));
@@ -32,14 +32,14 @@ class QuranCommandTest extends PHPUnit_Framework_TestCase
 
     public function test_empty()
     {
-        $expected = '/^Usage:\n  quran (.|\n)* Show version\n\n$/';
+        $expected = '/^Usage:\n  quran (.|\n)* List all translation\n$/';
 
         $this->assertRegExp($expected, $this->exec('quran'));
     }
 
     public function test_help()
     {
-        $expected = '/^Usage:\n  quran (.|\n)* Show version\n\n$/';
+        $expected = '/^Usage:\n  quran (.|\n)* List all translation\n$/';
 
         $this->assertRegExp($expected, $this->exec('quran -h'));
         $this->assertRegExp($expected, $this->exec('quran 2:3 -h'));

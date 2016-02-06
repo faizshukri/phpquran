@@ -10,6 +10,13 @@ use FaizShukri\Quran\Supports\Config;
 
 class Quran
 {
+    /**
+     * Quran application version.
+     *
+     * @var string
+     */
+    const VERSION = 'v0.3.5';
+
     private $config;
 
     private $translations = ['ar'];
@@ -181,6 +188,16 @@ class Quran
         // If one translation is requested, we remove it's key.
         // Else just return the current format
         return (sizeof($array) > 1) ? $array : $array[key($array)];
+    }
+
+    /**
+     * Get the Quran Application version
+     *
+     * @return string
+     */
+    public function version()
+    {
+        return static::VERSION;
     }
 
 }

@@ -6,9 +6,15 @@ class QuranTest extends PHPUnit_Framework_TestCase
 {
     private $quran;
 
-    public function setUp()
+    public function __construct()
     {
+        parent::__construct();
         $this->quran = new Quran();
+    }
+
+    public function test_version()
+    {
+        $this->assertNotEmpty($this->quran->version());
     }
 
     public function test_single_ayah()

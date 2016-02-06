@@ -14,8 +14,11 @@ class QuranCommand
 
     private $parser;
 
+    private $quran;
+
     public function __construct($uri)
     {
+        $this->quran = new Quran();
         $this->uri = $uri;
         $this->parser = new Parser();
         $this->parser->parse($this->uri);
@@ -77,14 +80,12 @@ class QuranCommand
             return $this->usage();
         }
 
-        $quran = new Quran();
-
         try {
             if ( $translation !== null ) {
-                $quran->translation( $translation );
+                $this->quran->translation( $translation );
             }
 
-            $ayah = $quran->get($ayah);
+            $ayah = $this->quran->get($ayah);
             return $this->parseResult($ayah) . "\n";
 
         } catch (\Exception $e) {
@@ -103,16 +104,18 @@ class QuranCommand
             "  quran 3:2,4-6 ar,en     (Surah 3, ayah 2,4,5,6, in arabic and english)". "\n\n" .
 
             "Options:" . "\n" .
-            "  -h, --help    : This help" . "\n" .
-            "  -v, --version : Show version\n\n";
+            "  -h, --help         This help" . "\n" .
+            "  -v, --version      Show version\n\n" .
+
+            "Available commands:\n" .
+            " list\n" .
+            "  list:surah         List all surah\n" .
+            "  list:translations  List all translation\n";
     }
 
     private function version()
     {
-        $string = file_get_contents(realpath( __DIR__ . '/../../composer.json' ));
-        $json_a = json_decode($string, true);
-
-        return 'Quran-Cli ' . $json_a['version'] . " by Faiz Shukri\n\n";
+        return 'Quran-Cli ' . $this->quran->version() . " by Faiz Shukri\n\n";
     }
 
 
