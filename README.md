@@ -118,19 +118,19 @@ $quran->translation('ar,en')->get('1:2,3');
 PHP Quran can be used in console like this.
 
 ```bash
-$ quran ayah 1:2
+$ quran ayah 1 2
 # ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ
 
-$ quran ayah 1:2,4-5 en
+$ quran ayah 1 2,4-5 en
 # [ 2 ]	[All] praise is [due] to Allah, Lord of the worlds -
 # [ 4 ]	Sovereign of the Day of Recompense.
 # [ 5 ]	It is You we worship and You we ask for help.
 
-$ quran ayah 1:2 ar,en
+$ quran ayah 1 2 ar,en
 # [ AR ]	ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ
 # [ EN ]	[All] praise is [due] to Allah, Lord of the worlds -
 
-$ quran ayah 1:2-4 ar,en
+$ quran ayah 1 2-4 ar,en
 #
 # AR
 # ====
