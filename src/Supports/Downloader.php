@@ -17,10 +17,10 @@ class Downloader
     {
         // Download quran data
         foreach ($this->config->get('translations') as $tr) {
-            $file = $this->config->get('storage_path') . '/' . $tr . '.' . $type;
+            $file = $this->config->get('storage_path').'/'.$tr.'.'.$type;
 
             if (!file_exists($file)) {
-                $url = 'http://tanzil.net/trans/?transID=' . $tr . '&type=' . $type;
+                $url = 'http://tanzil.net/trans/?transID='.$tr.'&type='.$type;
                 $this->download($url, $file);
             }
         }

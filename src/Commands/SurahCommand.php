@@ -53,15 +53,14 @@ class SurahCommand extends Command
         $ayah = $input->getArgument('ayah');
         $translation = $input->getArgument('translation');
 
-        if($ayah) {
-            if($translation){
-                $this->quran->translation( $translation );
+        if ($ayah) {
+            if ($translation) {
+                $this->quran->translation($translation);
             }
 
-            $ayah = $this->quran->get($surah . ':' . $ayah);
-            $output->writeln( $this->parseResult($ayah) );
-
-        } else if($surah) {
+            $ayah = $this->quran->get($surah.':'.$ayah);
+            $output->writeln($this->parseResult($ayah));
+        } elseif ($surah) {
             $this->chapter($output, $surah);
         } else {
             $this->chapters($output);
@@ -75,18 +74,18 @@ class SurahCommand extends Command
         $table = new Table($output);
         $table
             ->setHeaders([
-                [new TableCell('Surah ' . $surah->tname, array('colspan' => 2))]
+                [new TableCell('Surah '.$surah->tname, array('colspan' => 2))],
             ])
             ->setRows([
-                [ "Index",  $surah->index],
-                [ "Name",  $surah->tname],
-                [ "Name (ar)",  $surah->name],
-                [ "Meaning",  $surah->ename],
-                [ "No. Ayah",  $surah->ayas],
-                [ "Start",  $surah->start],
-                [ "Type",  $surah->type],
-                [ "Order",  $surah->order],
-                [ "Rukus",  $surah->rukus],
+                ['Index',  $surah->index],
+                ['Name',  $surah->tname],
+                ['Name (ar)',  $surah->name],
+                ['Meaning',  $surah->ename],
+                ['No. Ayah',  $surah->ayas],
+                ['Start',  $surah->start],
+                ['Type',  $surah->type],
+                ['Order',  $surah->order],
+                ['Rukus',  $surah->rukus],
             ])
             ->setStyle('borderless')
         ;
@@ -96,45 +95,46 @@ class SurahCommand extends Command
     private function chapters($output)
     {
         $surah = $this->quran->getSource()->chapters();
-        $surah = array_map(function($sura){ return "$sura->index. $sura->tname"; }, $surah);
+        $surah = array_map(function ($sura) { return "$sura->index. $sura->tname"; }, $surah);
         $surah = $this->array_chunk_vertical($surah, 4);
 
         $table = new Table($output);
         $table
             ->setHeaders([
-                [new TableCell('All surah', array('colspan' => 4))]
+                [new TableCell('All surah', array('colspan' => 4))],
             ])
             ->setRows($surah)
         ;
         $table->render();
     }
 
-    private function array_chunk_vertical($data, $columns) {
-        $n = count($data) ;
-        $per_column = floor($n / $columns) ;
-        $rest = $n % $columns ;
+    private function array_chunk_vertical($data, $columns)
+    {
+        $n = count($data);
+        $per_column = floor($n / $columns);
+        $rest = $n % $columns;
 
         // The map
-        $per_columns = array( ) ;
-        for ( $i = 0 ; $i < $columns ; $i++ ) {
-            $per_columns[$i] = $per_column + ($i < $rest ? 1 : 0) ;
+        $per_columns = array();
+        for ($i = 0; $i < $columns; ++$i) {
+            $per_columns[$i] = $per_column + ($i < $rest ? 1 : 0);
         }
 
-        $tabular = array( ) ;
-        foreach ( $per_columns as $rows ) {
-            for ( $i = 0 ; $i < $rows ; $i++ ) {
-                $tabular[$i][ ] = array_shift($data) ;
+        $tabular = array();
+        foreach ($per_columns as $rows) {
+            for ($i = 0; $i < $rows; ++$i) {
+                $tabular[$i][ ] = array_shift($data);
             }
         }
 
-        return $tabular ;
+        return $tabular;
     }
 
     private function parseResult($args)
     {
         // Just a single ayah is return. No need to parse anything.
         if (is_string($args)) {
-            return $args . "\n";
+            return $args."\n";
         }
 
         // Multiple ayah/one surah or multiple surah/one ayah. Not both.
@@ -147,8 +147,7 @@ class SurahCommand extends Command
         $result = "\n";
 
         foreach ($args as $translation => $aya) {
-
-            $result .= strtoupper($translation) . "\n" . str_repeat('=', strlen($translation) + 2) . "\n\n";
+            $result .= strtoupper($translation)."\n".str_repeat('=', strlen($translation) + 2)."\n\n";
             $result .= $this->buildAyah($aya);
 
             ++$count;
@@ -158,15 +157,15 @@ class SurahCommand extends Command
         }
 
         return $result;
-
     }
 
     private function buildAyah($ayah)
     {
-        $result = "";
+        $result = '';
         foreach ($ayah as $num => $aya) {
-            $result .= "[ " . strtoupper($num) . " ]\t" . $aya . "\n";
+            $result .= '[ '.strtoupper($num)." ]\t".$aya."\n";
         }
+
         return $result;
     }
 }
