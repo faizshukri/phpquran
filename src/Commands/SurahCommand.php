@@ -28,16 +28,40 @@ class SurahCommand extends Command
             ->addArgument(
                 'surah',
                 InputArgument::OPTIONAL,
-                'Select surah'
+                'Specify surah'
             )
+            ->addArgument(
+                'ayah',
+                InputArgument::OPTIONAL,
+                'Specify ayah'
+            )
+            ->addArgument(
+                'translation',
+                InputArgument::OPTIONAL,
+                'Specify ayah'
+            )
+            ->addUsage('2')
+            ->addUsage('2 3')
+            ->addUsage('2 3,5 en')
+            ->addUsage('2 3,5-6 ar,en')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $surah = $input->getArgument('surah');
+        $ayah = $input->getArgument('ayah');
+        $translation = $input->getArgument('translation');
 
-        if($surah){
+        if($ayah) {
+            if($translation){
+                $this->quran->translation( $translation );
+            }
+
+            $ayah = $this->quran->get($surah . ':' . $ayah);
+            $output->writeln( $this->parseResult($ayah) );
+
+        } else if($surah) {
             $this->chapter($output, $surah);
         } else {
             $this->chapters($output);
@@ -104,5 +128,45 @@ class SurahCommand extends Command
         }
 
         return $tabular ;
+    }
+
+    private function parseResult($args)
+    {
+        // Just a single ayah is return. No need to parse anything.
+        if (is_string($args)) {
+            return $args . "\n";
+        }
+
+        // Multiple ayah/one surah or multiple surah/one ayah. Not both.
+        if (is_string(current($args))) {
+            return $this->buildAyah($args);
+        }
+
+        // Both multiple ayah and multiple surah.
+        $count = 0;
+        $result = "\n";
+
+        foreach ($args as $translation => $aya) {
+
+            $result .= strtoupper($translation) . "\n" . str_repeat('=', strlen($translation) + 2) . "\n\n";
+            $result .= $this->buildAyah($aya);
+
+            ++$count;
+            if ($count < sizeof($args)) {
+                $result .= "\n\n";
+            }
+        }
+
+        return $result;
+
+    }
+
+    private function buildAyah($ayah)
+    {
+        $result = "";
+        foreach ($ayah as $num => $aya) {
+            $result .= "[ " . strtoupper($num) . " ]\t" . $aya . "\n";
+        }
+        return $result;
     }
 }
