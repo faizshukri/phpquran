@@ -11,12 +11,14 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "guzzlehttp/guzzle": "^5.3"
+        "guzzlehttp/guzzle": "^5.3",
+        "hoa/console": "^3.16"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",
         "symfony/yaml": "^2.8",
         "symfony/var-dumper": "^2.8",
+        "symfony/process": "^2.8",
         "mockery/mockery": "^0.9.4"
     },
     "autoload": {

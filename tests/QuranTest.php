@@ -1,7 +1,6 @@
 <?php
 
 use FaizShukri\Quran\Quran;
-use FaizShukri\Quran\Repositories\Source\XMLRepository;
 
 class QuranTest extends PHPUnit_Framework_TestCase
 {
