@@ -15,7 +15,7 @@ class Quran
      *
      * @var string
      */
-    const VERSION = 'v0.3.8';
+    const VERSION = 'v0.3.9';
 
     private $config;
 
@@ -41,6 +41,16 @@ class Quran
         $this->source = $source;
         $this->source->setConfig( $this->config );
         $this->source->initialize();
+    }
+
+    /**
+     * Get source variable
+     *
+     * @return \FaizShukri\Quran\Repositories\Source\SourceInterface $source
+     */
+    public function getSource()
+    {
+        return $this->source;
     }
 
     /**
