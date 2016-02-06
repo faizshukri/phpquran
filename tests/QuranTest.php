@@ -190,4 +190,20 @@ class QuranTest extends PHPUnit_Framework_TestCase
         $this->quran->get("a:1");
     }
 
+    /**
+     * @expectedException \FaizShukri\Quran\Exceptions\SurahInvalid
+     */
+    public function test_exception_wrong_argument_4()
+    {
+        $this->quran->get("115:2");
+    }
+
+    /**
+     * @expectedException \FaizShukri\Quran\Exceptions\AyahInvalid
+     */
+    public function test_exception_wrong_argument_5()
+    {
+        $this->quran->get("10:110");
+    }
+
 }

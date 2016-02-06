@@ -2,6 +2,7 @@
 
 namespace FaizShukri\Quran\Repositories\Source;
 
+use FaizShukri\Quran\Exceptions\AyahInvalid;
 use FaizShukri\Quran\Exceptions\SurahInvalid;
 use FaizShukri\Quran\Exceptions\TranslationNotExists;
 use FaizShukri\Quran\Supports\Config;
@@ -64,7 +65,9 @@ class XMLRepository implements SourceInterface
         $xml = new XML($xmlFile);
         $result = [];
 
-        $xpath = '//sura[@index=' . $surah . ']/aya[' . implode(' or ', array_map(function ($a) {
+        $max_ayah = intval($this->chapter($surah)->ayas);
+        $xpath = '//sura[@index=' . $surah . ']/aya[' . implode(' or ', array_map(function ($a) use($max_ayah) {
+                if($a > $max_ayah) throw new AyahInvalid;
                 return '@index=' . $a;
             }, $ayah)) . ']';
 
