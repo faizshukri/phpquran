@@ -101,6 +101,16 @@ class Quran
     }
 
     /**
+     * Get single chapter information
+     *
+     * @return object Chapter information of a chapter
+     */
+    public function chapter($chapter)
+    {
+        return $this->source->chapter($chapter);
+    }
+
+    /**
      * Parse the ayah requested of a certain surah. The format of ayah will
      * be translated into an array or ayah.
      *

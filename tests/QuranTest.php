@@ -106,7 +106,7 @@ class QuranTest extends PHPUnit_Framework_TestCase
         $this->assertCount(4, $this->quran->get('1:s,2,a,4-6,b'));
     }
 
-    public function test_get_surah()
+    public function test_get_chapters()
     {
         $chapters = $this->quran->chapters();
 
@@ -127,6 +127,14 @@ class QuranTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("Medinan", $chapters[24]->type);
         $this->assertEquals(49, $chapters[28]->order);
         $this->assertEquals(9, $chapters[33]->rukus);
+    }
+
+    public function test_get_chapter()
+    {
+        $chapter = $this->quran->chapter(14);
+
+        $this->assertCount(9, (array) $chapter);
+        $this->assertEquals("Ibrahim", $chapter->tname);
     }
 
     /**

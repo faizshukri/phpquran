@@ -36,7 +36,14 @@ class XMLRepository implements SourceInterface
 
     public function chapter($chapter)
     {
-        // TODO: Implement getSurah() method.
+        $xmlFile = $this->config->get('storage_path') . '/quran-data.xml';
+        $xml = new XML($xmlFile);
+
+        $xpath = "//suras/sura[@index=$chapter]";
+        $xpathResult = $xml->find($xpath);
+
+        $sura = (array) current($xpathResult);
+        return (object) $sura['@attributes'];
     }
 
     public function ayah($surah, $ayah, $translation = 'ar')
