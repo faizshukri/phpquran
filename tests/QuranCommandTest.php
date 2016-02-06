@@ -27,25 +27,25 @@ class QuranCommandTest extends PHPUnit_Framework_TestCase
 
     public function test_single_ayah_multi_translation()
     {
-        $expected = "[ AR ]\tٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَٰهُمْ يُنفِقُونَ\n" .
+        $expected = "[ AR ]\tٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَٰهُمْ يُنفِقُونَ\n".
                     "[ EN ]\tWho believe in the unseen, establish prayer, and spend out of what We have provided for them,\n\n";
         $this->assertEquals($expected, $this->exec('quran surah 2 3 ar,en'));
     }
 
     public function test_multi_ayah_single_translation()
     {
-        $expected = "[ 3 ]\tWho believe in the unseen, establish prayer, and spend out of what We have provided for them,\n" . 
+        $expected = "[ 3 ]\tWho believe in the unseen, establish prayer, and spend out of what We have provided for them,\n".
                     "[ 4 ]\tAnd who believe in what has been revealed to you, [O Muhammad], and what was revealed before you, and of the Hereafter they are certain [in faith].\n\n";
         $this->assertEquals($expected, $this->exec('quran surah 2 3,4 en'));
     }
 
     public function test_multi_ayah_multi_translation()
     {
-        $expected = "\nAR\n====\n\n" .
-                    "[ 2 ]\tذَٰلِكَ ٱلْكِتَٰبُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ\n" .
-                    "[ 3 ]\tٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَٰهُمْ يُنفِقُونَ\n\n" .
-                    "\nEN\n====\n\n" .
-                    "[ 2 ]\tThis is the Book about which there is no doubt, a guidance for those conscious of Allah -\n" .
+        $expected = "\nAR\n====\n\n".
+                    "[ 2 ]\tذَٰلِكَ ٱلْكِتَٰبُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ\n".
+                    "[ 3 ]\tٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَٰهُمْ يُنفِقُونَ\n\n".
+                    "\nEN\n====\n\n".
+                    "[ 2 ]\tThis is the Book about which there is no doubt, a guidance for those conscious of Allah -\n".
                     "[ 3 ]\tWho believe in the unseen, establish prayer, and spend out of what We have provided for them,\n\n";
 
         $this->assertEquals($expected, $this->exec('quran surah 2 2,3 ar,en'));
@@ -54,7 +54,7 @@ class QuranCommandTest extends PHPUnit_Framework_TestCase
     // Exec
     private function exec($cmd)
     {
-        $process = new Process("./$this->bin_path/" . $cmd);
+        $process = new Process("./$this->bin_path/".$cmd);
         $process->run();
 
         // executes after the command finishes

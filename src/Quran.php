@@ -28,23 +28,23 @@ class Quran
         $this->config = new Config($config);
 
         // By default, source is XML
-        $this->setSource( new XMLRepository() );
+        $this->setSource(new XMLRepository());
     }
 
     /**
-     * Set quran source either XML, Sql
+     * Set quran source either XML, Sql.
      *
      * @param \FaizShukri\Quran\Repositories\Source\SourceInterface $source
      */
     public function setSource(SourceInterface $source)
     {
         $this->source = $source;
-        $this->source->setConfig( $this->config );
+        $this->source->setConfig($this->config);
         $this->source->initialize();
     }
 
     /**
-     * Get source variable
+     * Get source variable.
      *
      * @return \FaizShukri\Quran\Repositories\Source\SourceInterface $source
      */
@@ -54,7 +54,7 @@ class Quran
     }
 
     /**
-     * Set translations to be used
+     * Set translations to be used.
      *
      * @param array|string $translations
      *
@@ -108,7 +108,7 @@ class Quran
     }
 
     /**
-     * Get array of chapters information
+     * Get array of chapters information.
      *
      * @return array Array of object for each chapter
      */
@@ -118,7 +118,7 @@ class Quran
     }
 
     /**
-     * Get single chapter information
+     * Get single chapter information.
      *
      * @return object Chapter information of a chapter
      */
@@ -140,7 +140,6 @@ class Quran
         $result = [];
 
         foreach (explode(',', $surah) as $comma) {
-
             $dash = explode('-', $comma);
 
             // Skip any invalid ayah
@@ -153,7 +152,7 @@ class Quran
                 array_push($result, intval($dash[0]));
             } // Range ayah, so we create all ayah in between.
             else {
-                for ($i = $dash[0]; $i <= $dash[1]; $i++) {
+                for ($i = $dash[0]; $i <= $dash[1]; ++$i) {
                     array_push($result, intval($i));
                 }
             }
@@ -172,6 +171,7 @@ class Quran
     private function sortArray(array $arr)
     {
         ksort($arr, SORT_NUMERIC);
+
         return $arr;
     }
 
@@ -201,7 +201,7 @@ class Quran
     }
 
     /**
-     * Get the Quran Application version
+     * Get the Quran Application version.
      *
      * @return string
      */
@@ -209,5 +209,4 @@ class Quran
     {
         return static::VERSION;
     }
-
 }

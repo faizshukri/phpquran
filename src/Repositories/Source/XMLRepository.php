@@ -2,6 +2,7 @@
 
 namespace FaizShukri\Quran\Repositories\Source;
 
+use FaizShukri\Quran\Exceptions\AyahInvalid;
 use FaizShukri\Quran\Exceptions\SurahInvalid;
 use FaizShukri\Quran\Exceptions\TranslationNotExists;
 use FaizShukri\Quran\Supports\Config;
@@ -19,7 +20,7 @@ class XMLRepository implements SourceInterface
 
     public function chapters()
     {
-        $xmlFile = $this->config->get('storage_path') . '/quran-data.xml';
+        $xmlFile = $this->config->get('storage_path').'/quran-data.xml';
         $xml = new XML($xmlFile);
         $result = [];
 
@@ -27,7 +28,7 @@ class XMLRepository implements SourceInterface
         $xpathResult = $xml->find($xpath);
 
         while (list(, $sura) = each($xpathResult)) {
-            $sura = (array)$sura;
+            $sura = (array) $sura;
             $sura = current($sura);
             $result[$sura['index']] = (object) $sura;
         }
@@ -37,20 +38,23 @@ class XMLRepository implements SourceInterface
 
     public function chapter($chapter)
     {
-        if($chapter < 1 || $chapter > 114) throw new SurahInvalid;
-        $xmlFile = $this->config->get('storage_path') . '/quran-data.xml';
+        if ($chapter < 1 || $chapter > 114) {
+            throw new SurahInvalid();
+        }
+        $xmlFile = $this->config->get('storage_path').'/quran-data.xml';
         $xml = new XML($xmlFile);
 
         $xpath = "//suras/sura[@index=$chapter]";
         $xpathResult = $xml->find($xpath);
 
         $sura = (array) current($xpathResult);
+
         return (object) $sura['@attributes'];
     }
 
     public function ayah($surah, $ayah, $translation = 'ar')
     {
-        $xmlFile = $this->config->get('storage_path') . '/' . $translation . '.xml';
+        $xmlFile = $this->config->get('storage_path').'/'.$translation.'.xml';
 
         // If files not exist, get the first match
         if (!file_exists($xmlFile)) {
@@ -58,20 +62,25 @@ class XMLRepository implements SourceInterface
         }
 
         if ($xmlFile === false) {
-            throw new TranslationNotExists("Translation " . $translation . " didn't exists. Please check your config.");
+            throw new TranslationNotExists('Translation '.$translation." didn't exists. Please check your config.");
         }
 
         $xml = new XML($xmlFile);
         $result = [];
 
-        $xpath = '//sura[@index=' . $surah . ']/aya[' . implode(' or ', array_map(function ($a) {
-                return '@index=' . $a;
-            }, $ayah)) . ']';
+        $max_ayah = intval($this->chapter($surah)->ayas);
+        $xpath = '//sura[@index='.$surah.']/aya['.implode(' or ', array_map(function ($a) use ($max_ayah) {
+                if ($a > $max_ayah) {
+                    throw new AyahInvalid();
+                }
+
+                return '@index='.$a;
+            }, $ayah)).']';
 
         $xpathResult = $xml->find($xpath);
 
         while (list(, $node) = each($xpathResult)) {
-            $node = (array)$node;
+            $node = (array) $node;
             $verse = current($node);
             $result[$verse['index']] = $verse['text'];
         }
@@ -82,11 +91,11 @@ class XMLRepository implements SourceInterface
     public function initialize()
     {
         // If original quran not exist in storage_path, copy one
-        $quran_source = realpath(__DIR__ . '/../../../data/ar.quran.xml');
-        $quran_dest = $this->config->get('storage_path') . '/ar.quran.xml';
+        $quran_source = realpath(__DIR__.'/../../../data/ar.quran.xml');
+        $quran_dest = $this->config->get('storage_path').'/ar.quran.xml';
 
-        $meta_source = realpath(__DIR__ . '/../../../data/quran-data.xml');
-        $meta_dest = $this->config->get('storage_path') . '/quran-data.xml';
+        $meta_source = realpath(__DIR__.'/../../../data/quran-data.xml');
+        $meta_dest = $this->config->get('storage_path').'/quran-data.xml';
 
         // If storage path didn't exist, create it
         if (!file_exists($this->config->get('storage_path'))) {
@@ -124,14 +133,13 @@ class XMLRepository implements SourceInterface
                 $filename = $fileinfo->getFilename();
 
                 // If match the first file with translation prefix, return it
-                $yes = preg_match('/^' . $translation . '/', $filename);
+                $yes = preg_match('/^'.$translation.'/', $filename);
                 if ($yes === 1) {
-                    return $this->config->get('storage_path') . '/' . $filename;
+                    return $this->config->get('storage_path').'/'.$filename;
                 }
             }
         }
 
         return false;
     }
-
 }

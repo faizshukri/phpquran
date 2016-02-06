@@ -14,12 +14,13 @@ class XML
     public function find($xpath)
     {
         $xml = new \SimpleXMLElement($this->xml);
+
         return $xml->xpath($xpath);
     }
 
     public function pathToXML($xmlPath)
     {
-        $xml = fopen($xmlPath, "r");
+        $xml = fopen($xmlPath, 'r');
         $res = fread($xml, filesize($xmlPath));
         fclose($xml);
 

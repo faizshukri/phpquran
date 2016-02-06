@@ -15,7 +15,6 @@ class SQLRepository implements SourceInterface
 
     public function initialize()
     {
-
     }
 
     public function chapters()
@@ -32,5 +31,4 @@ class SQLRepository implements SourceInterface
     {
         // TODO: Implement ayah() method.
     }
-
 }

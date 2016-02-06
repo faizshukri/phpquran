@@ -8,13 +8,11 @@ class QuranServiceProvider extends ServiceProvider
 {
     /**
      * Register bindings in the container.
-     *
-     * @return void
      */
     public function register()
     {
         $this->mergeConfigFrom(
-            realpath(__DIR__ . '/../config/quran.php'), 'quran'
+            realpath(__DIR__.'/../config/quran.php'), 'quran'
         );
 
         $this->app->bind(Quran::class, function ($app) {
@@ -28,14 +26,11 @@ class QuranServiceProvider extends ServiceProvider
 
     /**
      * Perform post-registration booting of services.
-     *
-     * @return void
      */
     public function boot()
     {
         $this->publishes([
-            realpath(__DIR__ . '/../config/quran.php') => config_path('quran.php'),
+            realpath(__DIR__.'/../config/quran.php') => config_path('quran.php'),
         ]);
     }
-
 }
