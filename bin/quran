@@ -7,8 +7,12 @@ if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
     require_once(realpath(__DIR__ . '/../../../autoload.php'));
 }
 
-use FaizShukri\Quran\Commands\QuranCommand;
+use FaizShukri\Quran\Quran;
+use Symfony\Component\Console\Application;
+use FaizShukri\Quran\Commands\AyahCommand;
+use FaizShukri\Quran\Commands\SurahCommand;
 
-$uri = implode(" ", array_slice($argv, 1));
-$command = new QuranCommand($uri);
-$command->execute();
+$application = new Application("Quran-Cli", Quran::version() . ' (Faiz Shukri)');
+$application->add(new AyahCommand());
+$application->add(new SurahCommand());
+$application->run();

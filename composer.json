@@ -12,7 +12,7 @@
     "require": {
         "php": ">=5.4.0",
         "guzzlehttp/guzzle": "^5.3",
-        "hoa/console": "^2.15"
+        "symfony/console": "^2.8"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",

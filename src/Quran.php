@@ -15,7 +15,7 @@ class Quran
      *
      * @var string
      */
-    const VERSION = 'v0.3.6';
+    const VERSION = 'v0.3.7';
 
     private $config;
 
@@ -77,7 +77,7 @@ class Quran
         $result = [];
 
         if (sizeof($args) <= 1) {
-            throw new AyahNotProvided("Ayah argument was not provided. Give at least one ayah from a surah.");
+            throw new AyahNotProvided();
         }
 
         // Get text for all translation
@@ -88,7 +88,7 @@ class Quran
 
             // Check if Surah and Ayah is in correct format
             if (!is_numeric($args[0]) || sizeof($ayah) === 0) {
-                throw new WrongArgument("Surah / Ayah format was incorrect. Please try again.");
+                throw new WrongArgument();
             }
 
             $result[$translation] = $this->source->ayah($args[0], $ayah, $translation);
@@ -195,7 +195,7 @@ class Quran
      *
      * @return string
      */
-    public function version()
+    public static function version()
     {
         return static::VERSION;
     }
