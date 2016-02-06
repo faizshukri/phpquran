@@ -44,6 +44,16 @@ class Quran
     }
 
     /**
+     * Get source variable
+     *
+     * @return \FaizShukri\Quran\Repositories\Source\SourceInterface $source
+     */
+    public function getSource()
+    {
+        return $this->source;
+    }
+
+    /**
      * Set translations to be used
      *
      * @param array|string $translations

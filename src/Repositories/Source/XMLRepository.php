@@ -2,6 +2,7 @@
 
 namespace FaizShukri\Quran\Repositories\Source;
 
+use FaizShukri\Quran\Exceptions\SurahInvalid;
 use FaizShukri\Quran\Exceptions\TranslationNotExists;
 use FaizShukri\Quran\Supports\Config;
 use FaizShukri\Quran\Supports\Downloader;
@@ -36,6 +37,7 @@ class XMLRepository implements SourceInterface
 
     public function chapter($chapter)
     {
+        if($chapter < 1 || $chapter > 114) throw new SurahInvalid;
         $xmlFile = $this->config->get('storage_path') . '/quran-data.xml';
         $xml = new XML($xmlFile);
 
