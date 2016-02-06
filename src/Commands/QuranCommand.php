@@ -19,6 +19,7 @@ class QuranCommand
         $this->uri = $uri;
         $this->parser = new Parser();
         $this->parser->parse($this->uri);
+
         $this->options = new GetOption(
             [
                 ['help',    GetOption::NO_ARGUMENT, 'h'],
@@ -59,16 +60,24 @@ class QuranCommand
                     echo $this->version();
             }
             echo "\n\n";
+            return;
         }
+
     }
 
     public function processAyah()
     {
         $this->parser->listInputs($ayah, $translation);
+
+        if(!$ayah && !$translation){
+            echo $this->usage() . "\n\n";
+            return false;
+        }
+
         $quran = new Quran();
 
         try {
-            if ( $translation ) {
+            if ( $translation !== null ) {
                 $quran->translation( $translation );
             }
 

@@ -39,7 +39,7 @@ class Quran
     /**
      * Set translations to be used
      *
-     * @param array $translations
+     * @param array|string $translations
      *
      * @return self
      */
