@@ -96,13 +96,20 @@ class QuranTest extends PHPUnit_Framework_TestCase
 
         $res = $res['en'];
 
-        $this->assertEquals('2', key($res)); next($res);
-        $this->assertEquals('4', key($res)); next($res);
-        $this->assertEquals('5', key($res)); next($res);
-        $this->assertEquals('6', key($res)); next($res);
-        $this->assertEquals('8', key($res)); next($res);
-        $this->assertEquals('11', key($res)); next($res);
-        $this->assertEquals('12', key($res)); next($res);
+        $this->assertEquals('2', key($res));
+        next($res);
+        $this->assertEquals('4', key($res));
+        next($res);
+        $this->assertEquals('5', key($res));
+        next($res);
+        $this->assertEquals('6', key($res));
+        next($res);
+        $this->assertEquals('8', key($res));
+        next($res);
+        $this->assertEquals('11', key($res));
+        next($res);
+        $this->assertEquals('12', key($res));
+        next($res);
         $this->assertEquals('13', key($res));
     }
 
@@ -126,10 +133,10 @@ class QuranTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(3, $chapters[3]->index);
         $this->assertEquals(120, $chapters[5]->ayas);
         $this->assertEquals(954, $chapters[7]->start);
-        $this->assertEquals("يونس", $chapters[10]->name);
-        $this->assertEquals("Ibrahim", $chapters[14]->tname);
-        $this->assertEquals("The Prophets", $chapters[21]->ename);
-        $this->assertEquals("Medinan", $chapters[24]->type);
+        $this->assertEquals('يونس', $chapters[10]->name);
+        $this->assertEquals('Ibrahim', $chapters[14]->tname);
+        $this->assertEquals('The Prophets', $chapters[21]->ename);
+        $this->assertEquals('Medinan', $chapters[24]->type);
         $this->assertEquals(49, $chapters[28]->order);
         $this->assertEquals(9, $chapters[33]->rukus);
     }
@@ -139,7 +146,7 @@ class QuranTest extends PHPUnit_Framework_TestCase
         $chapter = $this->quran->chapter(14);
 
         $this->assertCount(9, (array) $chapter);
-        $this->assertEquals("Ibrahim", $chapter->tname);
+        $this->assertEquals('Ibrahim', $chapter->tname);
     }
 
     /**
@@ -155,7 +162,7 @@ class QuranTest extends PHPUnit_Framework_TestCase
      */
     public function test_exception_ayah_not_provided()
     {
-        $this->quran->get("");
+        $this->quran->get('');
     }
 
     /**
@@ -163,7 +170,7 @@ class QuranTest extends PHPUnit_Framework_TestCase
      */
     public function test_exception_ayah_not_provided_2()
     {
-        $this->quran->get("2");
+        $this->quran->get('2');
     }
 
     /**
@@ -171,7 +178,7 @@ class QuranTest extends PHPUnit_Framework_TestCase
      */
     public function test_exception_wrong_argument()
     {
-        $this->quran->get("w:a");
+        $this->quran->get('w:a');
     }
 
     /**
@@ -179,7 +186,7 @@ class QuranTest extends PHPUnit_Framework_TestCase
      */
     public function test_exception_wrong_argument_2()
     {
-        $this->quran->get("1:a");
+        $this->quran->get('1:a');
     }
 
     /**
@@ -187,7 +194,7 @@ class QuranTest extends PHPUnit_Framework_TestCase
      */
     public function test_exception_wrong_argument_3()
     {
-        $this->quran->get("a:1");
+        $this->quran->get('a:1');
     }
 
     /**
@@ -195,7 +202,7 @@ class QuranTest extends PHPUnit_Framework_TestCase
      */
     public function test_exception_wrong_argument_4()
     {
-        $this->quran->get("115:2");
+        $this->quran->get('115:2');
     }
 
     /**
@@ -203,7 +210,6 @@ class QuranTest extends PHPUnit_Framework_TestCase
      */
     public function test_exception_wrong_argument_5()
     {
-        $this->quran->get("10:110");
+        $this->quran->get('10:110');
     }
-
 }

@@ -2,9 +2,9 @@
 
 namespace FaizShukri\Quran\Exceptions;
 
-use \Exception;
+use Exception;
 
 class WrongArgument extends Exception
 {
-    protected $message = "Surah / Ayah format was incorrect. Please try again.";
+    protected $message = 'Surah / Ayah format was incorrect. Please try again.';
 }

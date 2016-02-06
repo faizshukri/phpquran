@@ -2,7 +2,7 @@
 
 namespace FaizShukri\Quran\Exceptions;
 
-use \Exception;
+use Exception;
 
 class TranslationNotExists extends Exception
 {

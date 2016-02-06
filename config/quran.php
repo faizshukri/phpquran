@@ -12,7 +12,7 @@ return [
     |
     */
 
-    "storage_path" => "quran",
+    'storage_path' => 'quran',
 
     /*
     |--------------------------------------------------------------------------
@@ -139,5 +139,5 @@ return [
     |
     */
 
-    "translations" => ["en.sahih"],
+    'translations' => ['en.sahih'],
 ];
