@@ -15,7 +15,7 @@ class Quran
      *
      * @var string
      */
-    const VERSION = 'v0.3.8';
+    const VERSION = 'v0.3.9';
 
     private $config;
 
