@@ -6,9 +6,8 @@ class QuranTest extends PHPUnit_Framework_TestCase
 {
     private $quran;
 
-    public function __construct()
+    public function setUp()
     {
-        parent::__construct();
         $this->quran = new Quran();
     }
 
