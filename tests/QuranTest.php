@@ -146,7 +146,7 @@ class QuranTest extends PHPUnit_Framework_TestCase
         $chapter = $this->quran->surah(14);
 
         $this->assertCount(9, (array) $chapter);
-        $this->assertEquals('Ibrahim', $chapter->tname);
+        $this->assertEquals('Ibrahim', $chapter['tname']);
     }
 
     /**

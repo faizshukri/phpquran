@@ -13,7 +13,7 @@ interface SourceInterface
     /**
      * @param int|null $surah Surah number
      *
-     * @return array|object
+     * @return array
      */
     public function surah($surah = null);
 

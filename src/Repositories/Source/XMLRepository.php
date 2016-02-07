@@ -68,7 +68,7 @@ class XMLRepository implements SourceInterface
 
         $sura = (array) current($xpathResult);
 
-        return (object) $sura['@attributes'];
+        return $sura['@attributes'];
     }
 
     public function ayah($surah, $ayah, $translation = 'ar')
@@ -87,7 +87,7 @@ class XMLRepository implements SourceInterface
         $xml = new XML($xmlFile);
         $result = [];
 
-        $max_ayah = intval($this->surah($surah)->ayas);
+        $max_ayah = intval($this->surah($surah)['ayas']);
         $xpath = '//sura[@index='.$surah.']/aya['.implode(' or ', array_map(function ($a) use ($max_ayah) {
                 if ($a > $max_ayah) {
                     throw new AyahInvalid();
