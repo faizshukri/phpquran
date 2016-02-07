@@ -12,12 +12,12 @@ class ConfigTest extends PHPUnit_Framework_TestCase
             'level1' => 'yes',
             'level2' => [
                 'cool' => 'nice', 'great' => [
-                    'fantastic' => 'deep'
-                ]
+                    'fantastic' => 'deep',
+                ],
             ],
             'limit' => [
-                'ayah' => '5'
-            ]
+                'ayah' => '5',
+            ],
         ]);
     }
 
@@ -39,7 +39,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function test_build_merge_deep()
     {
-        $this->assertEquals( 5, $this->config->get('limit.ayah') );
-        $this->assertEquals( 3, $this->config->get('limit.translation') );
+        $this->assertEquals(5, $this->config->get('limit.ayah'));
+        $this->assertEquals(3, $this->config->get('limit.translation'));
     }
 }

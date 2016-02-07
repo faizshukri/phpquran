@@ -74,18 +74,18 @@ class SurahCommand extends Command
         $table = new Table($output);
         $table
             ->setHeaders([
-                [new TableCell('Surah '.$surah->tname, array('colspan' => 2))],
+                [new TableCell('Surah '.$surah['tname'], array('colspan' => 2))],
             ])
             ->setRows([
-                ['Index',  $surah->index],
-                ['Name',  $surah->tname],
-                ['Name (ar)',  $surah->name],
-                ['Meaning',  $surah->ename],
-                ['No. Ayah',  $surah->ayas],
-                ['Start',  $surah->start],
-                ['Type',  $surah->type],
-                ['Order',  $surah->order],
-                ['Rukus',  $surah->rukus],
+                ['Index',  $surah['index']],
+                ['Name',  $surah['tname']],
+                ['Name (ar)',  $surah['name']],
+                ['Meaning',  $surah['ename']],
+                ['No. Ayah',  $surah['ayas']],
+                ['Start',  $surah['start']],
+                ['Type',  $surah['type']],
+                ['Order',  $surah['order']],
+                ['Rukus',  $surah['rukus']],
             ])
             ->setStyle('borderless')
         ;
