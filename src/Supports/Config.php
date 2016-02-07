@@ -36,10 +36,27 @@ class Config
      *
      * @param string $val Variable name
      *
-     * @return mixed Variable value
+     * @return array|string Variable value
      */
     public function get($val)
     {
-        return $this->config[$val];
+        $configs = explode('.', $val);
+        $first = $this->config[array_shift($configs)];
+
+        foreach($configs as $config){
+            $first = $first[$config];
+        }
+
+        return $first;
+    }
+
+    /**
+     * Return all configurations
+     *
+     * @return array
+     */
+    public function all()
+    {
+        return $this->config;
     }
 }

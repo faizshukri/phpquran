@@ -3,9 +3,10 @@
 namespace FaizShukri\Quran;
 
 use FaizShukri\Quran\Repositories\Source\SourceInterface;
+use FaizShukri\Quran\Repositories\Source\XMLRepository;
 use FaizShukri\Quran\Exceptions\AyahNotProvided;
 use FaizShukri\Quran\Exceptions\WrongArgument;
-use FaizShukri\Quran\Repositories\Source\XMLRepository;
+use FaizShukri\Quran\Exceptions\ExceedLimit;
 use FaizShukri\Quran\Supports\Config;
 
 class Quran
@@ -62,12 +63,15 @@ class Quran
      */
     public function translation($translations)
     {
-        if (is_array($translations)) {
-            $this->translations = $translations;
-        } else {
-            $this->translations = explode(',', str_replace(' ', '', $translations));
+        if (is_string($translations)) {
+            $translations = explode(',', str_replace(' ', '', $translations));
         }
 
+        if(sizeof($translations) > $this->config->get('limit.translation')) {
+            throw new ExceedLimit("Too much translation provided. Your limit is " . $this->config->get('limit.translation') . " only.");
+        }
+
+        $this->translations = $translations;
         return $this;
     }
 
@@ -90,11 +94,15 @@ class Quran
             throw new AyahNotProvided();
         }
 
+        // Parse ayah arguments into array of ayah
+        $ayah = $this->parseSurah($args[1]);
+
+        if(sizeof($ayah) > $this->config->get('limit.ayah')) {
+            throw new ExceedLimit("Too much ayah provided. Your limit is " . $this->config->get('limit.ayah') . " only.");
+        }
+
         // Get text for all translation
         foreach ($this->translations as $translation) {
-
-            // Parse ayah arguments into array of ayah
-            $ayah = $this->parseSurah($args[1]);
 
             // Check if Surah and Ayah is in correct format
             if (!is_numeric($args[0]) || sizeof($ayah) === 0) {

@@ -150,6 +150,22 @@ class QuranTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @expectedException \FaizShukri\Quran\Exceptions\ExceedLimit
+     */
+    public function test_limit_ayah()
+    {
+        $this->quran->get('2:1-16');
+    }
+
+    /**
+     * @expectedException \FaizShukri\Quran\Exceptions\ExceedLimit
+     */
+    public function test_limit_translation()
+    {
+        $this->quran->translation('ar,en,ms,in')->get('2:3');
+    }
+
+    /**
      * @expectedException \FaizShukri\Quran\Exceptions\TranslationNotExists
      */
     public function test_exception_translation_not_exists()
