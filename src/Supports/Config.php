@@ -43,7 +43,7 @@ class Config
         $configs = explode('.', $val);
         $first = $this->config[array_shift($configs)];
 
-        foreach($configs as $config){
+        foreach ($configs as $config) {
             $first = $first[$config];
         }
 
@@ -51,7 +51,7 @@ class Config
     }
 
     /**
-     * Return all configurations
+     * Return all configurations.
      *
      * @return array
      */

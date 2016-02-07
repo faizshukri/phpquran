@@ -8,7 +8,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->config = new Config([ 'level1' => 'yes', 'level2' => [ 'cool' => 'nice', 'great' => [ 'fantastic' => 'deep' ] ] ]);
+        $this->config = new Config(['level1' => 'yes', 'level2' => ['cool' => 'nice', 'great' => ['fantastic' => 'deep']]]);
     }
 
     public function test_get()
@@ -18,7 +18,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function test_build_config()
     {
-        $this->assertCount(5, $this->config->all() );
+        $this->assertCount(5, $this->config->all());
     }
 
     public function test_get_deep()

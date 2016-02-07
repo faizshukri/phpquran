@@ -25,7 +25,7 @@ return [
 
     'limit' => [
         'ayah' => 15,
-        'translation' => 3
+        'translation' => 3,
     ],
 
     /*
