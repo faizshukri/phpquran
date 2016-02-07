@@ -21,7 +21,7 @@ class Config
     private function buildConfig(array $config = [])
     {
         // Merge our config with user config
-        $result = array_merge((include realpath(__DIR__.'/../../config/quran.php')), $config);
+        $result = array_replace_recursive((include realpath(__DIR__.'/../../config/quran.php')), $config);
 
         // If function storage_path is exist (laravel), we update the path to laravel's storage path
         if (function_exists('storage_path') && php_sapi_name() !== 'cli') {
