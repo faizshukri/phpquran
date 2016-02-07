@@ -51,6 +51,27 @@ class QuranCommandTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->exec('quran surah 2 2,3 ar,en'));
     }
 
+    public function test_surah()
+    {
+        $expected = "/^(\\+|-)*\n" .
+                    "\\| All surah                                                                     \\|\n" .
+                    "(\\+|-)*\n" .
+                    "\\| 1. Al-Faatiha    \\| 30. Ar-Room       \\| 59. Al-Hashr       \\| 87. Al-A'laa      \\|\n" .
+                    "\\| 2. Al-Baqara     \\| 31. Luqman        \\| 60. Al-Mumtahana   \\| 88. Al-Ghaashiya  \\|/";
+
+        $this->assertRegExp($expected, $this->exec('quran surah'));
+    }
+
+    public function test_surah_1()
+    {
+        $expected = "/^ =========== =========== \n" .
+                    "  Surah Al-Baqara        \n" .
+                    " =========== =========== /";
+
+        $this->assertRegExp($expected, $this->exec('quran surah 2'));
+    }
+
+
     // Exec
     private function exec($cmd)
     {

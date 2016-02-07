@@ -69,7 +69,7 @@ class SurahCommand extends Command
 
     private function chapter($output, $verse)
     {
-        $surah = $this->quran->getSource()->chapter($verse);
+        $surah = $this->quran->getSource()->surah($verse);
 
         $table = new Table($output);
         $table
