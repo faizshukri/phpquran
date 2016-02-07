@@ -120,7 +120,7 @@ class QuranTest extends PHPUnit_Framework_TestCase
 
     public function test_get_chapters()
     {
-        $chapters = $this->quran->chapters();
+        $chapters = $this->quran->surah();
 
         // Make chapters is contain array of 114 element
         $this->assertCount(114, $chapters);
@@ -143,7 +143,7 @@ class QuranTest extends PHPUnit_Framework_TestCase
 
     public function test_get_chapter()
     {
-        $chapter = $this->quran->chapter(14);
+        $chapter = $this->quran->surah(14);
 
         $this->assertCount(9, (array) $chapter);
         $this->assertEquals('Ibrahim', $chapter->tname);

@@ -36,15 +36,34 @@ class XMLRepository implements SourceInterface
         return $result;
     }
 
-    public function chapter($chapter)
+    public function surah($surah = null)
     {
-        if ($chapter < 1 || $chapter > 114) {
+
+        // Get all chapter
+        if ($surah === null) {
+            $xmlFile = $this->config->get('storage_path').'/quran-data.xml';
+            $xml = new XML($xmlFile);
+            $result = [];
+
+            $xpath = '//suras/sura';
+            $xpathResult = $xml->find($xpath);
+
+            while (list(, $sura) = each($xpathResult)) {
+                $sura = (array) $sura;
+                $sura = current($sura);
+                $result[$sura['index']] = (object) $sura;
+            }
+
+            return $result;
+        }
+
+        if ($surah < 1 || $surah > 114) {
             throw new SurahInvalid();
         }
         $xmlFile = $this->config->get('storage_path').'/quran-data.xml';
         $xml = new XML($xmlFile);
 
-        $xpath = "//suras/sura[@index=$chapter]";
+        $xpath = "//suras/sura[@index=$surah]";
         $xpathResult = $xml->find($xpath);
 
         $sura = (array) current($xpathResult);
@@ -68,7 +87,7 @@ class XMLRepository implements SourceInterface
         $xml = new XML($xmlFile);
         $result = [];
 
-        $max_ayah = intval($this->chapter($surah)->ayas);
+        $max_ayah = intval($this->surah($surah)->ayas);
         $xpath = '//sura[@index='.$surah.']/aya['.implode(' or ', array_map(function ($a) use ($max_ayah) {
                 if ($a > $max_ayah) {
                     throw new AyahInvalid();

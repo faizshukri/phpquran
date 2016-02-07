@@ -10,11 +10,12 @@ interface SourceInterface
 
     public function initialize();
 
-    // Information of all surah
-    public function chapters();
-
-    // Information of a surah
-    public function chapter($chapter);
+    /**
+     * @param int|null $surah Surah number
+     *
+     * @return array|object
+     */
+    public function surah($surah = null);
 
     // Get ayah
     public function ayah($surah, $ayah, $translation = 'ar');

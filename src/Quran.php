@@ -67,11 +67,12 @@ class Quran
             $translations = explode(',', str_replace(' ', '', $translations));
         }
 
-        if(sizeof($translations) > $this->config->get('limit.translation')) {
-            throw new ExceedLimit("Too much translation provided. Your limit is " . $this->config->get('limit.translation') . " only.");
+        if (sizeof($translations) > $this->config->get('limit.translation')) {
+            throw new ExceedLimit('Too much translation provided. Your limit is '.$this->config->get('limit.translation').' only.');
         }
 
         $this->translations = $translations;
+
         return $this;
     }
 
@@ -97,8 +98,8 @@ class Quran
         // Parse ayah arguments into array of ayah
         $ayah = $this->parseSurah($args[1]);
 
-        if(sizeof($ayah) > $this->config->get('limit.ayah')) {
-            throw new ExceedLimit("Too much ayah provided. Your limit is " . $this->config->get('limit.ayah') . " only.");
+        if (sizeof($ayah) > $this->config->get('limit.ayah')) {
+            throw new ExceedLimit('Too much ayah provided. Your limit is '.$this->config->get('limit.ayah').' only.');
         }
 
         // Get text for all translation
@@ -116,23 +117,13 @@ class Quran
     }
 
     /**
-     * Get array of chapters information.
-     *
-     * @return array Array of object for each chapter
-     */
-    public function chapters()
-    {
-        return $this->source->chapters();
-    }
-
-    /**
-     * Get single chapter information.
+     * Get surah information.
      *
      * @return object Chapter information of a chapter
      */
-    public function chapter($chapter)
+    public function surah($surah = null)
     {
-        return $this->source->chapter($chapter);
+        return $this->source->surah($surah);
     }
 
     /**

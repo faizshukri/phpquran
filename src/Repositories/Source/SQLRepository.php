@@ -17,12 +17,7 @@ class SQLRepository implements SourceInterface
     {
     }
 
-    public function chapters()
-    {
-        // TODO: Implement chapters() method.
-    }
-
-    public function chapter($chapter)
+    public function surah($surah = null)
     {
         // TODO: Implement chapter() method.
     }
