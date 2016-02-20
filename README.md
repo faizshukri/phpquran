@@ -174,6 +174,40 @@ $ quran surah 1 2-4 ar,en
 
 ```
 
+#### Surah name
+
+You can also specify surah by its name. If the surah specified cannot found, it will find the closest one first and will suggest to you if more than a surah is found.
+
+```bash
+
+$ quran surah baqara
+#  =========== ===========
+#   Surah Al-Baqara
+#  =========== ===========
+#   Index       2
+#   Name        Al-Baqara
+#   Name (ar)   البقرة
+#   Meaning     The Cow
+#   No. Ayah    286
+#   Start       7
+#   Type        Medinan
+#   Order       87
+#   Rukus       40
+#  =========== =========== 
+
+$ quran surah nas 4
+# No surah found. Did you mean one of the following?
+#   [0] Yunus
+#   [1] Abasa
+#   [2] An-Nasr
+#   [3] An-Naas
+#  > 3
+
+مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ
+
+```
+
+
 ## License
 
 The PHP Quran code is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
