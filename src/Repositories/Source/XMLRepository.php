@@ -18,24 +18,6 @@ class XMLRepository implements SourceInterface
         $this->config = $config;
     }
 
-    public function chapters()
-    {
-        $xmlFile = $this->config->get('storage_path').'/quran-data.xml';
-        $xml = new XML($xmlFile);
-        $result = [];
-
-        $xpath = '//suras/sura';
-        $xpathResult = $xml->find($xpath);
-
-        while (list(, $sura) = each($xpathResult)) {
-            $sura = (array) $sura;
-            $sura = current($sura);
-            $result[$sura['index']] = (object) $sura;
-        }
-
-        return $result;
-    }
-
     public function surah($surah = null)
     {
 

@@ -15,8 +15,10 @@ class Downloader
 
     public function sync($type = 'xml')
     {
+        $translations = (array) $this->config->get('translations');
+
         // Download quran data
-        foreach ($this->config->get('translations') as $tr) {
+        foreach ($translations as $tr) {
             $file = $this->config->get('storage_path').'/'.$tr.'.'.$type;
 
             if (!file_exists($file)) {

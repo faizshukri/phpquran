@@ -15,6 +15,7 @@ class SQLRepository implements SourceInterface
 
     public function initialize()
     {
+        // TODO: Implement initialize() method.
     }
 
     public function surah($surah = null)

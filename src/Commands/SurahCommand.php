@@ -99,7 +99,7 @@ class SurahCommand extends Command
 
     private function chapters($output)
     {
-        $surah = $this->quran->getSource()->chapters();
+        $surah = $this->quran->getSource()->surah();
         $surah = array_map(function ($sura) { return "$sura->index. $sura->tname"; }, $surah);
         $surah = $this->array_chunk_vertical($surah, 4);
 
