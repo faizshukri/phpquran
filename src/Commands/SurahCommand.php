@@ -3,12 +3,15 @@
 namespace FaizShukri\Quran\Commands;
 
 use FaizShukri\Quran\Quran;
-use Symfony\Component\Console\Command\Command;
+use FaizShukri\Quran\Supports\Levenshtein;
+use FaizShukri\Quran\Exceptions\SurahInvalid;
+use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableCell;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\Table;
+use Symfony\Component\Console\Question\ChoiceQuestion;
 
 class SurahCommand extends Command
 {
@@ -52,6 +55,8 @@ class SurahCommand extends Command
         $surah = $input->getArgument('surah');
         $ayah = $input->getArgument('ayah');
         $translation = $input->getArgument('translation');
+
+        $surah = $this->confirmSurahNo($surah, $input, $output);
 
         if ($ayah) {
             if ($translation) {
@@ -128,6 +133,64 @@ class SurahCommand extends Command
         }
 
         return $tabular;
+    }
+
+    /**
+     * @param int|string|null $surah
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     *
+     * @return int|null
+     *
+     * @throws SurahInvalid
+     */
+    private function confirmSurahNo($surah, $input, $output)
+    {
+        if ($surah && !is_numeric($surah)) {
+            $surah_list = $this->quran->surah();
+            $surah_list_array = array_map(function ($surah) { return $surah->tname; }, (array) $surah_list);
+            $closest_surah = $this->closestSurah($surah, $surah_list_array);
+
+            if (sizeof($closest_surah) == 1) {
+                $surah = $closest_surah[0];
+            } elseif (sizeof($closest_surah) > 1) {
+                $surah = $this->askSurah($closest_surah, $input, $output);
+            } else {
+                throw new SurahInvalid();
+            }
+            $surah = array_search($surah, $surah_list_array);
+        }
+
+        return ($surah === null) ? null : intval($surah);
+    }
+
+    /**
+     * @param string $surah
+     * @param array  $options
+     *
+     * @return array
+     */
+    private function closestSurah($surah, $options)
+    {
+        $l = new Levenshtein();
+
+        return $l->closest($surah, $options);
+    }
+
+    /**
+     * @param array           $options
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     *
+     * @return mixed
+     */
+    private function askSurah($options, $input, $output)
+    {
+        $helper = $this->getHelper('question');
+        $question = new ChoiceQuestion('No surah found. Did you mean one of the following?', $options, 0);
+        $question->setErrorMessage('Surah %s is invalid.');
+
+        return $helper->ask($input, $output, $question);
     }
 
     private function parseResult($args)

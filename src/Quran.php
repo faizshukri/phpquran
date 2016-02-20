@@ -90,6 +90,7 @@ class Quran
     {
         $args = explode(':', $args);
         $result = [];
+        $surah = $args[0];
 
         if (sizeof($args) <= 1) {
             throw new AyahNotProvided();
@@ -102,15 +103,14 @@ class Quran
             throw new ExceedLimit('Too much ayah provided. Your limit is '.$this->config->get('limit.ayah').' only.');
         }
 
+        // Check if Surah and Ayah is in correct format
+        if (!is_numeric($surah) || sizeof($ayah) === 0) {
+            throw new WrongArgument();
+        }
+
         // Get text for all translation
         foreach ($this->translations as $translation) {
-
-            // Check if Surah and Ayah is in correct format
-            if (!is_numeric($args[0]) || sizeof($ayah) === 0) {
-                throw new WrongArgument();
-            }
-
-            $result[$translation] = $this->source->ayah($args[0], $ayah, $translation);
+            $result[$translation] = $this->source->ayah($surah, $ayah, $translation);
         }
 
         return $this->minimize($result);
