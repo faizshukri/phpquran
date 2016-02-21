@@ -12,11 +12,30 @@ interface SourceInterface
 
     /**
      * @param int|null $surah Surah number
-     *
      * @return array
      */
     public function surah($surah = null);
 
-    // Get ayah
+    /**
+     * Get surah
+     *
+     * @param int $surah
+     * @param array $ayah
+     * @param string $translation
+     * @return mixed
+     */
     public function ayah($surah, $ayah, $translation = 'ar');
+
+    /**
+     * Get translations
+     *
+     * @return array
+     */
+    public function translations();
+
+    /**
+     * @param string $translation
+     * @return boolean
+     */
+    public function addTranslation($translation);
 }

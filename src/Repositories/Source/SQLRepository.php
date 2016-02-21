@@ -27,4 +27,14 @@ class SQLRepository implements SourceInterface
     {
         // TODO: Implement ayah() method.
     }
+
+    public function translations()
+    {
+        // TODO: Implement translation() method.
+    }
+
+    public function addTranslation($translation)
+    {
+        // TODO: Implement addTranslation() method.
+    }
 }

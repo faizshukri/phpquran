@@ -10,7 +10,9 @@ if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
 use FaizShukri\Quran\Quran;
 use Symfony\Component\Console\Application;
 use FaizShukri\Quran\Commands\SurahCommand;
+use FaizShukri\Quran\Commands\TranslationListCommand;
 
 $application = new Application("Quran-Cli", Quran::version() . ' (Faiz Shukri)');
 $application->add(new SurahCommand());
+$application->add(new TranslationListCommand());
 $application->run();

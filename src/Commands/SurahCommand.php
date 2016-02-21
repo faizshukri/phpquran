@@ -46,7 +46,8 @@ class SurahCommand extends Command
             ->addUsage('2')
             ->addUsage('2 3')
             ->addUsage('2 3,5 en')
-            ->addUsage('2 3,5-6 ar,en')
+            ->addUsage('baqara 3-5')
+            ->addUsage('baqara 3,5-6 ar,en')
         ;
     }
 

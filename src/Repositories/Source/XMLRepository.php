@@ -143,4 +143,22 @@ class XMLRepository implements SourceInterface
 
         return false;
     }
+
+
+    public function translations()
+    {
+        $dir = scandir($this->config->get('storage_path'));
+        $translations = array_filter($dir, function($a){
+            return ($a !== "." && $a !== ".." && $a !== 'quran-data.xml');
+        });
+
+        return array_values(
+            array_map(function($a){ return str_replace(".xml", "", $a); }, $translations)
+        );
+    }
+
+    public function addTranslation($translation)
+    {
+        // TODO: Implement addTranslation() method.
+    }
 }
