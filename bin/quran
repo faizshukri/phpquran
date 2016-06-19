@@ -11,8 +11,10 @@ use FaizShukri\Quran\Quran;
 use Symfony\Component\Console\Application;
 use FaizShukri\Quran\Commands\SurahCommand;
 use FaizShukri\Quran\Commands\TranslationListCommand;
+use FaizShukri\Quran\Commands\TranslationAddCommand;
 
 $application = new Application("Quran-Cli", Quran::version() . ' (Faiz Shukri)');
 $application->add(new SurahCommand());
 $application->add(new TranslationListCommand());
+$application->add(new TranslationAddCommand());
 $application->run();

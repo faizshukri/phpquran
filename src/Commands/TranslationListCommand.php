@@ -12,11 +12,14 @@ class TranslationListCommand extends Command
 {
     private $source;
 
+    private $config;
+
     public function __construct()
     {
         parent::__construct();
+        $this->config = new Config;
         $this->source = new XMLRepository;
-        $this->source->setConfig(new Config);
+        $this->source->setConfig($this->config);
     }
 
     protected function configure()
@@ -41,6 +44,6 @@ class TranslationListCommand extends Command
 
     private function translations()
     {
-        return $this->source->translations();
+        return $this->config->get('translations');
     }
 }

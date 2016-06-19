@@ -9,13 +9,13 @@ class Config
     public function __construct(array $config = [])
     {
         $this->config = $this->buildConfig($config);
+        $this->config['translations'] = array_merge($this->config['translations'], $this->customTranslations());
     }
 
     /**
      * Build a config array. Merge user defined config with our default config.
      *
      * @param array $config User defined config
-     *
      * @return array New configuration array
      */
     private function buildConfig(array $config = [])
@@ -30,6 +30,9 @@ class Config
             $result['storage_path'] = realpath(__DIR__ . '/../..') . '/' . $result['storage_path'];
         }
 
+        // Merge translation with custom translation variable
+        
+
         return $result;
     }
 
@@ -37,7 +40,6 @@ class Config
      * Get the config variable.
      *
      * @param string $val Variable name
-     *
      * @return array|string Variable value
      */
     public function get($val)
@@ -60,5 +62,32 @@ class Config
     public function all()
     {
         return $this->config;
+    }
+
+    /**
+     * Set/get custom translation
+     *
+     * @param string $id Translation ID
+     * @return array|void
+     */
+    public function customTranslations($id = null)
+    {
+        $path = $this->config['storage_path'] . '/translation';
+
+        $file = fopen($path, "a+");
+        $contents = fread($file, filesize($path) ?: 1);
+
+        $customTranslations = array_filter(explode(",", $contents));
+
+        if ($id === null) {
+            fclose($file);
+            return $customTranslations;
+        } else {
+            if(!in_array($id, $customTranslations)){
+                array_push($this->config['translations'], $id);
+                fwrite($file, ",$id");
+                fclose($file);
+            }
+        }
     }
 }
