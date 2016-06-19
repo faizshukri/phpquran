@@ -25,7 +25,9 @@ class Config
 
         // If function storage_path is exist (laravel), we update the path to laravel's storage path
         if (function_exists('storage_path') && php_sapi_name() !== 'cli') {
-            $result['storage_path'] = storage_path('app'.DIRECTORY_SEPARATOR.$result['storage_path']);
+            $result['storage_path'] = storage_path('app/' . $result['storage_path']);
+        } else {
+            $result['storage_path'] = realpath(__DIR__ . '/../..') . '/' . $result['storage_path'];
         }
 
         return $result;
