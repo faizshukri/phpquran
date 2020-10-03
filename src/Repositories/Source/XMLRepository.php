@@ -20,36 +20,35 @@ class XMLRepository implements SourceInterface
 
     public function surah($surah = null)
     {
-
-        // Get all chapter
-        if ($surah === null) {
-            $xmlFile = $this->config->get('storage_path').'/quran-data.xml';
-            $xml = new XML($xmlFile);
-            $result = [];
-
-            $xpath = '//suras/sura';
-            $xpathResult = $xml->find($xpath);
-
-            foreach ($xpathResult as $node) {
-                $sura = ((array) $node)['@attributes'];
-                $result[$sura['index']] = (object) $sura;
-            }
-
-            return $result;
-        }
-
-        if ($surah < 1 || $surah > 114) {
+        if (is_int($surah) && ($surah < 1 || $surah > 114)) {
             throw new SurahInvalid();
         }
+
         $xmlFile = $this->config->get('storage_path').'/quran-data.xml';
         $xml = new XML($xmlFile);
 
-        $xpath = "//suras/sura[@index=$surah]";
+        $xpath = '//suras/sura';
+
+        if ($surah != null) {
+            $xpath .= "[@index={$surah}]";
+        }
+
         $xpathResult = $xml->find($xpath);
 
-        $sura = (array) current($xpathResult);
+        if ($surah != null) {
+            $sura = (array) current($xpathResult);
+            return $sura['@attributes'];
+        }
 
-        return $sura['@attributes'];
+        // If `$surah` is null, then get all chapters
+        $result = [];
+
+        foreach ($xpathResult as $node) {
+            $sura = ((array) $node)['@attributes'];
+            $result[$sura['index']] = (object) $sura;
+        }
+
+        return $result;
     }
 
     public function ayah($surah, $ayah, $translation = 'ar')
