@@ -30,9 +30,8 @@ class XMLRepository implements SourceInterface
             $xpath = '//suras/sura';
             $xpathResult = $xml->find($xpath);
 
-            while (list(, $sura) = each($xpathResult)) {
-                $sura = (array) $sura;
-                $sura = current($sura);
+            foreach ($xpathResult as $node) {
+                $sura = ((array) $node)['@attributes'];
                 $result[$sura['index']] = (object) $sura;
             }
 
@@ -80,10 +79,9 @@ class XMLRepository implements SourceInterface
 
         $xpathResult = $xml->find($xpath);
 
-        while (list(, $node) = each($xpathResult)) {
-            $node = (array) $node;
-            $verse = current($node);
-            $result[$verse['index']] = $verse['text'];
+        foreach ($xpathResult as $node) {
+            $sura = ((array) $node)['@attributes'];
+            $result[$sura['index']] = $sura['text'];
         }
 
         return $result;
