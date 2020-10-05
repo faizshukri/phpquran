@@ -71,6 +71,8 @@ class SurahCommand extends Command
         } else {
             $this->chapters($output);
         }
+
+        return 0;
     }
 
     private function chapter($output, $verse)

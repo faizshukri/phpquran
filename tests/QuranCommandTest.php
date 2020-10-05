@@ -90,7 +90,7 @@ class QuranCommandTest extends TestCase
     // Exec
     private function exec($cmd)
     {
-        $process = new Process("./$this->bin_path/" . $cmd);
+        $process = new Process(explode(" ", "./$this->bin_path/" . $cmd));
         $process->run();
 
         // executes after the command finishes
