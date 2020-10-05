@@ -8,14 +8,12 @@ use Symfony\Component\Console\Tester\CommandTester;
 class QuranCommandTest extends TestCase
 {
     private $surah_command;
-    private $command_name;
     private $command_tester;
 
     public function __construct()
     {
         parent::__construct();
         $this->surah_command = new SurahCommand();
-        $this->command_name = $this->surah_command->getName();
         $this->command_tester = new CommandTester($this->surah_command);
     }
 
@@ -172,7 +170,7 @@ class QuranCommandTest extends TestCase
     private function getOutputFromSurahCommand($arguments)
     {
         $this->command_tester->execute(array_merge(
-            [$this->command_name],
+            [$this->surah_command->getName()],
             $arguments
         ));
 
