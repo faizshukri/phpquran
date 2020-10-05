@@ -20,37 +20,35 @@ class XMLRepository implements SourceInterface
 
     public function surah($surah = null)
     {
-
-        // Get all chapter
-        if ($surah === null) {
-            $xmlFile = $this->config->get('storage_path').'/quran-data.xml';
-            $xml = new XML($xmlFile);
-            $result = [];
-
-            $xpath = '//suras/sura';
-            $xpathResult = $xml->find($xpath);
-
-            while (list(, $sura) = each($xpathResult)) {
-                $sura = (array) $sura;
-                $sura = current($sura);
-                $result[$sura['index']] = (object) $sura;
-            }
-
-            return $result;
-        }
-
-        if ($surah < 1 || $surah > 114) {
+        if (is_int($surah) && ($surah < 1 || $surah > 114)) {
             throw new SurahInvalid();
         }
+
         $xmlFile = $this->config->get('storage_path').'/quran-data.xml';
         $xml = new XML($xmlFile);
 
-        $xpath = "//suras/sura[@index=$surah]";
+        $xpath = '//suras/sura';
+
+        if ($surah != null) {
+            $xpath .= "[@index={$surah}]";
+        }
+
         $xpathResult = $xml->find($xpath);
 
-        $sura = (array) current($xpathResult);
+        if ($surah != null) {
+            $sura = (array) current($xpathResult);
+            return $sura['@attributes'];
+        }
 
-        return $sura['@attributes'];
+        // If `$surah` is null, then get all chapters
+        $result = [];
+
+        foreach ($xpathResult as $node) {
+            $sura = ((array) $node)['@attributes'];
+            $result[$sura['index']] = (object) $sura;
+        }
+
+        return $result;
     }
 
     public function ayah($surah, $ayah, $translation = 'ar')
@@ -69,7 +67,7 @@ class XMLRepository implements SourceInterface
         $xml = new XML($xmlFile);
         $result = [];
 
-        $max_ayah = intval($this->surah($surah)['ayas']);
+        $max_ayah = intval($this->surah(intval($surah))['ayas']);
         $xpath = '//sura[@index='.$surah.']/aya['.implode(' or ', array_map(function ($a) use ($max_ayah) {
                 if ($a > $max_ayah) {
                     throw new AyahInvalid();
@@ -80,10 +78,9 @@ class XMLRepository implements SourceInterface
 
         $xpathResult = $xml->find($xpath);
 
-        while (list(, $node) = each($xpathResult)) {
-            $node = (array) $node;
-            $verse = current($node);
-            $result[$verse['index']] = $verse['text'];
+        foreach ($xpathResult as $node) {
+            $sura = ((array) $node)['@attributes'];
+            $result[$sura['index']] = $sura['text'];
         }
 
         return $result;

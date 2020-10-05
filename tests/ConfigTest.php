@@ -1,12 +1,13 @@
 <?php
 
 use FaizShukri\Quran\Supports\Config;
+use PHPUnit\Framework\TestCase;
 
-class ConfigTest extends PHPUnit_Framework_TestCase
+class ConfigTest extends TestCase
 {
     private $config;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->config = new Config([
             'level1' => 'yes',
