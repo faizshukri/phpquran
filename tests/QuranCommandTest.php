@@ -1,9 +1,10 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 
-class QuranCommandTest extends PHPUnit_Framework_TestCase
+class QuranCommandTest extends TestCase
 {
     private $bin_path;
 
@@ -27,48 +28,48 @@ class QuranCommandTest extends PHPUnit_Framework_TestCase
 
     public function test_single_ayah_multi_translation()
     {
-        $expected = "[ AR ]\tٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَٰهُمْ يُنفِقُونَ\n".
-                    "[ EN ]\tWho believe in the unseen, establish prayer, and spend out of what We have provided for them,\n\n";
+        $expected = "[ AR ]\tٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَٰهُمْ يُنفِقُونَ\n" .
+            "[ EN ]\tWho believe in the unseen, establish prayer, and spend out of what We have provided for them,\n\n";
         $this->assertEquals($expected, $this->exec('quran surah 2 3 ar,en'));
     }
 
     public function test_multi_ayah_single_translation()
     {
-        $expected = "[ 3 ]\tWho believe in the unseen, establish prayer, and spend out of what We have provided for them,\n".
-                    "[ 4 ]\tAnd who believe in what has been revealed to you, [O Muhammad], and what was revealed before you, and of the Hereafter they are certain [in faith].\n\n";
+        $expected = "[ 3 ]\tWho believe in the unseen, establish prayer, and spend out of what We have provided for them,\n" .
+            "[ 4 ]\tAnd who believe in what has been revealed to you, [O Muhammad], and what was revealed before you, and of the Hereafter they are certain [in faith].\n\n";
         $this->assertEquals($expected, $this->exec('quran surah 2 3,4 en'));
     }
 
     public function test_multi_ayah_multi_translation()
     {
-        $expected = "\nAR\n====\n\n".
-                    "[ 2 ]\tذَٰلِكَ ٱلْكِتَٰبُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ\n".
-                    "[ 3 ]\tٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَٰهُمْ يُنفِقُونَ\n\n".
-                    "\nEN\n====\n\n".
-                    "[ 2 ]\tThis is the Book about which there is no doubt, a guidance for those conscious of Allah -\n".
-                    "[ 3 ]\tWho believe in the unseen, establish prayer, and spend out of what We have provided for them,\n\n";
+        $expected = "\nAR\n====\n\n" .
+            "[ 2 ]\tذَٰلِكَ ٱلْكِتَٰبُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ\n" .
+            "[ 3 ]\tٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَٰهُمْ يُنفِقُونَ\n\n" .
+            "\nEN\n====\n\n" .
+            "[ 2 ]\tThis is the Book about which there is no doubt, a guidance for those conscious of Allah -\n" .
+            "[ 3 ]\tWho believe in the unseen, establish prayer, and spend out of what We have provided for them,\n\n";
 
         $this->assertEquals($expected, $this->exec('quran surah 2 2,3 ar,en'));
     }
 
     public function test_surah()
     {
-        $expected = "/^(\\+|-)*\n".
-                    "\\| All surah                                                                     \\|\n".
-                    "(\\+|-)*\n".
-                    "\\| 1. Al-Faatiha    \\| 30. Ar-Room       \\| 59. Al-Hashr       \\| 87. Al-A'laa      \\|\n".
-                    '\\| 2. Al-Baqara     \\| 31. Luqman        \\| 60. Al-Mumtahana   \\| 88. Al-Ghaashiya  \\|/';
+        $expected = "/^(\\+|-)*\n" .
+            "\\| All surah                                                                     \\|\n" .
+            "(\\+|-)*\n" .
+            "\\| 1. Al-Faatiha    \\| 30. Ar-Room       \\| 59. Al-Hashr       \\| 87. Al-A'laa      \\|\n" .
+            '\\| 2. Al-Baqara     \\| 31. Luqman        \\| 60. Al-Mumtahana   \\| 88. Al-Ghaashiya  \\|/';
 
-        $this->assertRegExp($expected, $this->exec('quran surah'));
+        $this->assertMatchesRegularExpression($expected, $this->exec('quran surah'));
     }
 
     public function test_surah_1()
     {
-        $expected = "/^ =========== =========== \n".
-                    "  Surah Al-Baqara        \n".
-                    ' =========== =========== /';
+        $expected = "/^ =========== =========== \n" .
+            "  Surah Al-Baqara        \n" .
+            ' =========== =========== /';
 
-        $this->assertRegExp($expected, $this->exec('quran surah 2'));
+        $this->assertMatchesRegularExpression($expected, $this->exec('quran surah 2'));
     }
 
     public function test_surah_2()
@@ -79,17 +80,17 @@ class QuranCommandTest extends PHPUnit_Framework_TestCase
 
     public function test_surah_3()
     {
-        $expected = "/^ =========== =========== \n".
-            "  Surah Al-Baqara        \n".
+        $expected = "/^ =========== =========== \n" .
+            "  Surah Al-Baqara        \n" .
             ' =========== =========== /';
 
-        $this->assertRegExp($expected, $this->exec('quran surah baqara'));
+        $this->assertMatchesRegularExpression($expected, $this->exec('quran surah baqara'));
     }
 
     // Exec
     private function exec($cmd)
     {
-        $process = new Process("./$this->bin_path/".$cmd);
+        $process = new Process("./$this->bin_path/" . $cmd);
         $process->run();
 
         // executes after the command finishes

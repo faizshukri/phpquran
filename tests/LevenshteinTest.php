@@ -1,14 +1,15 @@
 <?php
 
 use FaizShukri\Quran\Supports\Levenshtein;
+use PHPUnit\Framework\TestCase;
 
-class LevenshteinTest extends PHPUnit_Framework_TestCase
+class LevenshteinTest extends TestCase
 {
     private $words;
 
     private $l;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->words = [
             'Al-Faatiha',

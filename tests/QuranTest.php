@@ -1,12 +1,13 @@
 <?php
 
 use FaizShukri\Quran\Quran;
+use PHPUnit\Framework\TestCase;
 
-class QuranTest extends PHPUnit_Framework_TestCase
+class QuranTest extends TestCase
 {
     private $quran;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->quran = new Quran();
     }
@@ -149,83 +150,63 @@ class QuranTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Ibrahim', $chapter['tname']);
     }
 
-    /**
-     * @expectedException \FaizShukri\Quran\Exceptions\ExceedLimit
-     */
     public function test_limit_ayah()
     {
+        $this->expectException(\FaizShukri\Quran\Exceptions\ExceedLimit::class);
         $this->quran->get('2:1-16');
     }
 
-    /**
-     * @expectedException \FaizShukri\Quran\Exceptions\ExceedLimit
-     */
     public function test_limit_translation()
     {
+        $this->expectException(\FaizShukri\Quran\Exceptions\ExceedLimit::class);
         $this->quran->translation('ar,en,ms,in')->get('2:3');
     }
 
-    /**
-     * @expectedException \FaizShukri\Quran\Exceptions\TranslationNotExists
-     */
     public function test_exception_translation_not_exists()
     {
+        $this->expectException(\FaizShukri\Quran\Exceptions\TranslationNotExists::class);
         $this->quran->translation('ms')->get('1:3');
     }
 
-    /**
-     * @expectedException \FaizShukri\Quran\Exceptions\AyahNotProvided
-     */
     public function test_exception_ayah_not_provided()
     {
+        $this->expectException(\FaizShukri\Quran\Exceptions\AyahNotProvided::class);
         $this->quran->get('');
     }
 
-    /**
-     * @expectedException \FaizShukri\Quran\Exceptions\AyahNotProvided
-     */
     public function test_exception_ayah_not_provided_2()
     {
+        $this->expectException(\FaizShukri\Quran\Exceptions\AyahNotProvided::class);
         $this->quran->get('2');
     }
 
-    /**
-     * @expectedException \FaizShukri\Quran\Exceptions\WrongArgument
-     */
     public function test_exception_wrong_argument()
     {
+        $this->expectException(\FaizShukri\Quran\Exceptions\WrongArgument::class);
         $this->quran->get('w:a');
     }
 
-    /**
-     * @expectedException \FaizShukri\Quran\Exceptions\WrongArgument
-     */
     public function test_exception_wrong_argument_2()
     {
+        $this->expectException(\FaizShukri\Quran\Exceptions\WrongArgument::class);
         $this->quran->get('1:a');
     }
 
-    /**
-     * @expectedException \FaizShukri\Quran\Exceptions\WrongArgument
-     */
     public function test_exception_wrong_argument_3()
     {
+        $this->expectException(\FaizShukri\Quran\Exceptions\WrongArgument::class);
         $this->quran->get('a:1');
     }
 
-    /**
-     * @expectedException \FaizShukri\Quran\Exceptions\SurahInvalid
-     */
     public function test_exception_wrong_argument_4()
     {
+        $this->expectException(\FaizShukri\Quran\Exceptions\SurahInvalid::class);
         $this->quran->get('115:2');
     }
 
-    /**
-     * @expectedException \FaizShukri\Quran\Exceptions\AyahInvalid
-     */
     public function test_exception_wrong_argument_5()
     {
+        $this->expectException(\FaizShukri\Quran\Exceptions\AyahInvalid::class);
         $this->quran->get('10:110');
     }
 }
