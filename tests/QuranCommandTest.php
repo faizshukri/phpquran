@@ -1,6 +1,7 @@
 <?php
 
 use FaizShukri\Quran\Commands\SurahCommand;
+use FaizShukri\Quran\Exceptions\SurahInvalid;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -137,6 +138,35 @@ class QuranCommandTest extends TestCase
         ];
 
         $this->assertMatchesRegularExpression($expected, $this->getOutputFromSurahCommand($arguments));
+    }
+
+    public function test_ask_surah()
+    {
+        $arguments = [
+            'surah' => 'bqr'
+        ];
+
+        $this->command_tester->setInputs(['0']);
+
+        $output = $this->getOutputFromSurahCommand($arguments);
+
+        $this->assertStringContainsString('No surah found. Did you mean one of the following?', $output);
+        $this->assertStringContainsString('Surah Al-Baqara', $output);
+        $this->assertStringContainsString('Index       2', $output);
+        $this->assertStringContainsString('Name        Al-Baqara', $output);
+        $this->assertStringContainsString('Name (ar)   البقرة', $output);
+        $this->assertStringContainsString('Meaning     The Cow', $output);
+    }
+
+    public function test_surah_invalid()
+    {
+        $this->expectException(SurahInvalid::class);
+
+        $arguments = [
+            'surah' => 'abcdefgh'
+        ];
+
+        $this->getOutputFromSurahCommand($arguments);
     }
 
     private function getOutputFromSurahCommand($arguments)
