@@ -19,12 +19,18 @@ class SurahCommand extends Command
 {
     private $quran;
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function __construct()
     {
         parent::__construct();
         $this->quran = new Quran();
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     protected function configure()
     {
         $this
