@@ -2,12 +2,14 @@
 
 namespace FaizShukri\Quran\Commands;
 
+use FaizShukri\Quran\Exceptions\SurahInvalid;
 use FaizShukri\Quran\Quran;
 use FaizShukri\Quran\Supports\Levenshtein;
-use FaizShukri\Quran\Exceptions\SurahInvalid;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\HelperSet;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableCell;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -17,12 +19,18 @@ class SurahCommand extends Command
 {
     private $quran;
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function __construct()
     {
         parent::__construct();
         $this->quran = new Quran();
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     protected function configure()
     {
         $this
@@ -189,6 +197,7 @@ class SurahCommand extends Command
      */
     private function askSurah($options, $input, $output)
     {
+        $this->setHelperSet(new HelperSet([new QuestionHelper()]));
         $helper = $this->getHelper('question');
         $question = new ChoiceQuestion('No surah found. Did you mean one of the following?', $options, 0);
         $question->setErrorMessage('Surah %s is invalid.');
