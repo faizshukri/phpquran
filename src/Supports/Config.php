@@ -73,6 +73,13 @@ class Config
     public function customTranslations($id = null)
     {
         $path = $this->config['storage_path'] . '/translation';
+        if (!file_exists($this->config['storage_path'])) {
+            mkdir($this->config['storage_path']);
+        }
+
+        if (!file_exists($path)) {
+            touch($path);
+        }
 
         $file = fopen($path, "a+");
         $contents = fread($file, filesize($path) ?: 1);
