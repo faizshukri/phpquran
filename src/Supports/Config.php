@@ -8,6 +8,8 @@ class Config
 
     public $configFile;
 
+    public $dataDir;
+
     public function __construct(array $config = [])
     {
         $this->config = $this->buildConfig($config);
@@ -28,13 +30,12 @@ class Config
 
         // If function storage_path is exist (laravel), we update the path to laravel's storage path
         if (function_exists('storage_path') && php_sapi_name() !== 'cli') {
-            $result['storage_path'] = storage_path('app/' . $result['storage_path']);
+            $this->dataDir =  storage_path('app/' . $result['storage_path']);
         } else {
-            $result['storage_path'] = realpath(__DIR__ . '/../..') . '/' . $result['storage_path'];
+            $this->dataDir =  realpath(__DIR__ . '/../..') . '/' . $result['storage_path'];
         }
 
-        // Merge translation with custom translation variable
-
+        $result['storage_path'] = $this->dataDir;
         return $result;
     }
 
