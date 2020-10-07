@@ -26,7 +26,11 @@ $ composer require faizshukri/phpquran
 
 PHP Quran has optional support for [Laravel](https://laravel.com) and comes with a Service Provider and Facades for easy integration.
 
-After you have installed PHP Quran via Composer, open your Laravel config file `config/app.php` and add the following lines.
+Laravel version starting 5.5+ can use Package Auto-Discovery, so doesn't require you to manually add the ServiceProvider.
+
+#### Laravel without auto-discovery
+
+Open your Laravel config file `config/app.php` and add the following lines.
 
 In the `$providers` array add the service providers for this package.
 
