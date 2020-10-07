@@ -7,7 +7,7 @@ class ConfigTest extends TestCase
 {
     private $config;
 
-    protected function setUp(): void
+    protected function setUp()
     {
         $this->config = new Config([
             'level1' => 'yes',

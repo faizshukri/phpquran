@@ -7,7 +7,7 @@ class QuranTest extends TestCase
 {
     private $quran;
 
-    protected function setUp(): void
+    protected function setUp()
     {
         $this->quran = new Quran();
     }

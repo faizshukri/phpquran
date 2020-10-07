@@ -9,7 +9,7 @@ class LevenshteinTest extends TestCase
 
     private $l;
 
-    protected function setUp(): void
+    protected function setUp()
     {
         $this->words = [
             'Al-Faatiha',

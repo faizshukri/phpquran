@@ -15,7 +15,7 @@ class TestCase extends PHPUnitTestCase
         return \PHPUnit\Runner\Version::id();
     }
 
-    public static function assertStringContainsString($needle, $haystack, $message = ''): void
+    public static function assertStringContainsString($needle, $haystack, $message = '')
     {
         if (version_compare(self::phpunitVersion(), '7.0.0', '<')) {
             parent::assertContains($needle, $haystack, $message);
@@ -24,7 +24,7 @@ class TestCase extends PHPUnitTestCase
         }
     }
 
-    public static function assertMatchesRegularExpression($pattern, $string, $message = ''): void
+    public static function assertMatchesRegularExpression($pattern, $string, $message = '')
     {
         if (version_compare(self::phpunitVersion(), '9.0.0', '<')) {
             parent::assertRegExp($pattern, $string);

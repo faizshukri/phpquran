@@ -14,7 +14,7 @@ PHP Quran was created by, and is maintained by [Faiz Shukri](https://github.com/
 
 ## Installation
 
-[PHP](https://php.net) 5.5+ is required.
+[PHP](https://php.net) 5.6+/7+ is required.
 
 This project can be installed via [Composer]:
 
