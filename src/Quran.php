@@ -16,7 +16,7 @@ class Quran
      *
      * @var string
      */
-    const VERSION = 'v0.5.0';
+    const VERSION = '1.0.0-beta';
 
     private $config;
 
@@ -206,6 +206,6 @@ class Quran
      */
     public static function version()
     {
-        return static::VERSION;
+        return 'v' . static::VERSION;
     }
 }
