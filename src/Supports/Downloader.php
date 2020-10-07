@@ -22,6 +22,10 @@ class Downloader
             $file = $this->config->get('storage_path').'/'.$tr.'.'.$type;
 
             if (!file_exists($file)) {
+                if (php_sapi_name() === 'cli') {
+                    echo "Downloading translation \e[32m$tr\e[0m ...\n";
+                }
+
                 $url = 'http://tanzil.net/trans/?transID='.$tr.'&type='.$type;
                 $this->download($url, $file);
             }
