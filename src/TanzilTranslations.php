@@ -23,8 +23,8 @@ class TanzilTranslations
             [
                 "id" => "sq.mehdiu",
                 "language" => "Albanian",
-                "name" => "Efendi Nahi",
-                "translator" => "Feti Mehdiu by Feti Mehdiu"
+                "name" => "Feti Mehdiu",
+                "translator" => "Feti Mehdiu"
             ],
             [
                 "id" => "sq.ahmeti",
@@ -161,7 +161,7 @@ class TanzilTranslations
             [
                 "id" => "en.arberry",
                 "language" => "English",
-                "name" => "Arberry by",
+                "name" => "Arberry",
                 "translator" => "A. J. Arberry"
             ],
             [
@@ -287,13 +287,13 @@ class TanzilTranslations
             [
                 "id" => "hi.farooq",
                 "language" => "Hindi",
-                "name" => "फ़ारूक़ ख़ान & अहमद",
+                "name" => "फ़ारूक़ ख़ान & अहमद",
                 "translator" => "Muhammad Farooq Khan and Muhammad Ahmed"
             ],
             [
                 "id" => "hi.hindi",
                 "language" => "Hindi",
-                "name" => "फ़ारूक़ ख़ान & नदवी",
+                "name" => "फ़ारूक़ ख़ान & नदवी",
                 "translator" => "Suhel Farooq Khan and Saifur Rahman Nadwi"
             ],
             [
@@ -363,10 +363,10 @@ class TanzilTranslations
                 "translator" => "Einar Berg"
             ],
             [
-                "id" => "fa.ghomshei",
-                "language" => "Persian",
-                "name" => "الهی قمشه‌ای",
-                "translator" => "Mahdi Elahi Ghomshei"
+                "id" => "ps.abdulwali",
+                "language" => "Pashto",
+                "name" => "عبدالولي",
+                "translator" => "Abdulwali Khan"
             ],
             [
                 "id" => "fa.ansarian",
@@ -385,6 +385,18 @@ class TanzilTranslations
                 "language" => "Persian",
                 "name" => "بهرام پور",
                 "translator" => "Abolfazl Bahrampour"
+            ],
+            [
+                "id" => "fa.gharaati",
+                "language" => "Persian",
+                "name" => "قرائتی",
+                "translator" => "Mohsen Gharaati"
+            ],
+            [
+                "id" => "fa.ghomshei",
+                "language" => "Persian",
+                "name" => "الهی قمشه‌ای",
+                "translator" => "Mahdi Elahi Ghomshei"
             ],
             [
                 "id" => "fa.khorramdel",
@@ -472,13 +484,13 @@ class TanzilTranslations
             ],
             [
                 "id" => "ru.kuliev-alsaadi",
-                "language" =>"Russian",
+                "language" => "Russian",
                 "name" => "Кулиев + ас-Саади",
                 "translator" => "Elmir Kuliev (with Abd ar-Rahman as-Saadi's commentaries)"
             ],
             [
                 "id" => "ru.osmanov",
-                "language"  => "Russian",
+                "language" => "Russian",
                 "name" => "Османов",
                 "translator" => "Magomed-Nuri Osmanovich Osmanov"
             ],
@@ -496,37 +508,37 @@ class TanzilTranslations
             ],
             [
                 "id" => "sd.amroti",
-                "language"   => "Sindhi",
+                "language" => "Sindhi",
                 "name" => "امروٽي",
                 "translator" => "Taj Mehmood Amroti"
             ],
             [
                 "id" => "so.abduh",
-                "language"    => "Somali",
+                "language" => "Somali",
                 "name" => "Abduh",
                 "translator" => "Mahmud Muhammad Abduh"
             ],
             [
                 "id" => "es.bornez",
-                "language"   => "Spanish",
+                "language" => "Spanish",
                 "name" => "Bornez",
                 "translator" => "Raúl González Bórnez"
             ],
             [
                 "id" => "es.cortes",
-                "language"   => "Spanish",
+                "language" => "Spanish",
                 "name" => "Cortes",
                 "translator" => "Julio Cortes"
             ],
             [
                 "id" => "es.garcia",
-                "language"   => "Spanish",
+                "language" => "Spanish",
                 "name" => "Garcia",
                 "translator" => "Muhammad Isa García"
             ],
             [
                 "id" => "sw.barwani",
-                "language"  => "Swahili",
+                "language" => "Swahili",
                 "name" => "Al-Barwani",
                 "translator" => "Ali Muhsin Al-Barwani"
             ],
@@ -538,25 +550,25 @@ class TanzilTranslations
             ],
             [
                 "id" => "tg.ayati",
-                "language"    => "Tajik",
+                "language" => "Tajik",
                 "name" => "Оятӣ",
                 "translator" => "AbdolMohammad Ayati"
             ],
             [
                 "id" => "ta.tamil",
-                "language"    => "Tamil",
+                "language" => "Tamil",
                 "name" => "ஜான் டிரஸ்ட்",
                 "translator" => "Jan Turst Foundation"
             ],
             [
                 "id" => "tt.nugman",
-                "language"   => "Tatar",
+                "language" => "Tatar",
                 "name" => "Yakub Ibn Nugman",
                 "translator" => "Yakub Ibn Nugman"
             ],
             [
                 "id" => "th.thai",
-                "language"     => "Thai",
+                "language" => "Thai",
                 "name" => "ภาษาไทย",
                 "translator" => "King Fahad Quran Complex"
             ],
@@ -568,7 +580,7 @@ class TanzilTranslations
             ],
             [
                 "id" => "tr.bulac",
-                "language"    => "Turkish",
+                "language" => "Turkish",
                 "name" => "Alİ Bulaç",
                 "translator" => "Alİ Bulaç"
             ],
@@ -580,31 +592,31 @@ class TanzilTranslations
             ],
             [
                 "id" => "tr.diyanet",
-                "language"  => "Turkish",
+                "language" => "Turkish",
                 "name" => "Diyanet İşleri",
                 "translator" => "Diyanet Isleri"
             ],
             [
                 "id" => "tr.vakfi",
-                "language"    => "Turkish",
+                "language" => "Turkish",
                 "name" => "Diyanet Vakfı",
                 "translator" => "Diyanet Vakfi"
             ],
             [
                 "id" => "tr.yuksel",
-                "language"   => "Turkish",
+                "language" => "Turkish",
                 "name" => "Edip Yüksel",
                 "translator" => "Edip Yüksel"
             ],
             [
                 "id" => "tr.yazir",
-                "language"    => "Turkish",
+                "language" => "Turkish",
                 "name" => "Elmalılı Hamdi Yazır",
                 "translator" => "Elmalili Hamdi Yazir"
             ],
             [
                 "id" => "tr.ozturk",
-                "language"   => "Turkish",
+                "language" => "Turkish",
                 "name" => "Öztürk",
                 "translator" => "Yasar Nuri Ozturk"
             ],
@@ -616,13 +628,13 @@ class TanzilTranslations
             ],
             [
                 "id" => "tr.ates",
-                "language"     => "Turkish",
+                "language" => "Turkish",
                 "name" => "Süleyman Ateş",
                 "translator" => "Suleyman Ates"
             ],
             [
                 "id" => "ur.maududi",
-                "language"  => "Urdu",
+                "language" => "Urdu",
                 "name" => "ابوالاعلی مودودی",
                 "translator" => "Abul A'ala Maududi"
             ],
@@ -646,13 +658,13 @@ class TanzilTranslations
             ],
             [
                 "id" => "ur.qadri",
-                "language"    => "Urdu",
+                "language" => "Urdu",
                 "name" => "طاہر القادری",
                 "translator" => "Tahir ul Qadri"
             ],
             [
                 "id" => "ur.jawadi",
-                "language"   => "Urdu",
+                "language" => "Urdu",
                 "name" => "علامہ جوادی",
                 "translator" => "Syed Zeeshan Haider Jawadi"
             ],
@@ -664,27 +676,27 @@ class TanzilTranslations
             ],
             [
                 "id" => "ur.najafi",
-                "language"   => "Urdu",
+                "language" => "Urdu",
                 "name" => "محمد حسین نجفی",
-                "translator" => "Ayatollah Muhammad Hussain Najafi"
+                "translator" => "Muhammad Hussain Najafi"
             ],
             [
                 "id" => "ug.saleh",
-                "language"    => "Uyghur",
+                "language" => "Uyghur",
                 "name" => "محمد صالح",
                 "translator" => "Muhammad Saleh"
             ],
             [
                 "id" => "uz.sodik",
-                "language"    => "Uzbek",
+                "language" => "Uzbek",
                 "name" => "Мухаммад Содик",
                 "translator" => "Muhammad Sodik Muhammad Yusuf"
             ]
         ];
 
-        if($translation_id !== null) {
-            foreach($translations as $translation){
-                if($translation_id == $translation['id']) {
+        if ($translation_id !== null) {
+            foreach ($translations as $translation) {
+                if ($translation_id == $translation['id']) {
                     return $translation;
                 }
             }

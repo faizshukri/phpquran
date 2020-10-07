@@ -45,7 +45,7 @@ return [
     | "ber.mensur"  => (Amazigh), At Mensur by Ramdane At Mansour
     | "ar.jalalayn" => (Arabic), تفسير الجلالين by Jalal ad-Din al-Mahalli and Jalal ad-Din as-Suyuti
     | "ar.muyassar" => (Arabic), تفسير المیسر by King Fahad Quran Complex
-    | "am.sadiq"    => (Amharic ), ሳዲቅ & ሳኒ ሐቢብ by Muhammed Sadiq and Muhammed Sani Habib
+    | "am.sadiq"    => (Amharic), ሳዲቅ & ሳኒ ሐቢብ by Muhammed Sadiq and Muhammed Sani Habib
     | "az.mammadaliyev" => (Azerbaijani), Məmmədəliyev & Bünyadov by Vasim Mammadaliyev and Ziya Bunyadov
     | "az.musayev"  => (Azerbaijani), Musayev by Alikhan Musayev
     | "bn.hoque"    => (Bengali), জহুরুল হক by Zohurul Hoque
@@ -84,8 +84,8 @@ return [
     | "de.khoury"   => (German), Khoury by Adel Theodor Khoury
     | "de.zaidan"   => (German), Zaidan by Amir Zaidan
     | "ha.gumi"     => (Hausa), Gumi by Abubakar Mahmoud Gumi
-    | "hi.farooq"   => (Hindi), फ़ारूक़ ख़ान & अहमद by Muhammad Farooq Khan and Muhammad Ahmed
-    | "hi.hindi"    => (Hindi), फ़ारूक़ ख़ान & नदवी by Suhel Farooq Khan and Saifur Rahman Nadwi
+    | "hi.farooq"   => (Hindi), फ़ारूक़ ख़ान & अहमद by Muhammad Farooq Khan and Muhammad Ahmed
+    | "hi.hindi"    => (Hindi), फ़ारूक़ ख़ान & नदवी by Suhel Farooq Khan and Saifur Rahman Nadwi
     | "id.indonesian" => (Indonesian), Bahasa Indonesia by Indonesian Ministry of Religious Affairs
     | "id.muntakhab" => (Indonesian), Quraish Shihab by Muhammad Quraish Shihab et al.
     | "id.jalalayn" => (Indonesian), Tafsir Jalalayn by Jalal ad-Din al-Mahalli and Jalal ad-Din as-Suyuti
@@ -97,10 +97,12 @@ return [
     | "ml.abdulhameed" => (Malayalam), അബ്ദുല്‍ ഹമീദ് & പറപ്പൂര്‍ by Cheriyamundam Abdul Hameed and Kunhi Mohammed Parappoor
     | "ml.karakunnu" => (Malayalam), കാരകുന്ന് & എളയാവൂര് by Muhammad Karakunnu and Vanidas Elayavoor
     | "no.berg"     => (Norwegian), Einar Berg by Einar Berg
-    | "fa.ghomshei" => (Persian), الهی قمشه‌ای by Mahdi Elahi Ghomshei
+    | "ps.abdulwali" => (Pashto), عبدالولي by Abdulwali Khan
     | "fa.ansarian" => (Persian), انصاریان by Hussain Ansarian
     | "fa.ayati"    => (Persian), آیتی by AbdolMohammad Ayati
     | "fa.bahrampour" => (Persian), بهرام پور by Abolfazl Bahrampour
+    | "fa.gharaati" => (Persian), قرائتی by Mohsen Gharaati
+    | "fa.ghomshei" => (Persian), الهی قمشه‌ای by Mahdi Elahi Ghomshei
     | "fa.khorramdel" => (Persian), خرمدل by Mostafa Khorramdel
     | "fa.khorramshahi" => (Persian), خرمشاهی by Baha'oddin Khorramshahi
     | "fa.sadeqi"   => (Persian), صادقی تهرانی by Mohammad Sadeqi Tehrani
@@ -147,7 +149,7 @@ return [
     | "ur.qadri"    => (Urdu), طاہر القادری by Tahir ul Qadri
     | "ur.jawadi"   => (Urdu), علامہ جوادی by Syed Zeeshan Haider Jawadi
     | "ur.junagarhi" => (Urdu), محمد جوناگڑھی by Muhammad Junagarhi
-    | "ur.najafi"   => (Urdu), محمد حسین نجفی by Ayatollah Muhammad Hussain Najafi 
+    | "ur.najafi"   => (Urdu), محمد حسین نجفی by Muhammad Hussain Najafi
     | "ug.saleh"    => (Uyghur), محمد صالح by Muhammad Saleh
     | "uz.sodik"    => (Uzbek), Мухаммад Содик by Muhammad Sodik Muhammad Yusuf
     |
