@@ -26,8 +26,7 @@ class TranslationListCommand extends Command
     {
         $this
             ->setName('translation:list')
-            ->setDescription('View available translations')
-        ;
+            ->setDescription('View available translations');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -35,11 +34,13 @@ class TranslationListCommand extends Command
         $translations = $this->translations();
 
         $output->writeln("<info>Available translations. (For usage, you can use short form, example: </info>en <info>instead of</info> en.sahih <info>)</info>");
-        foreach($translations as $translation){
+        foreach ($translations as $translation) {
             $output->writeln("  - <comment>$translation</comment>");
         }
 
         $output->writeln("");
+
+        return 0;
     }
 
     private function translations()

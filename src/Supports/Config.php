@@ -6,10 +6,11 @@ class Config
 {
     private $config;
 
+    public $configFile;
+
     public function __construct(array $config = [])
     {
         $this->config = $this->buildConfig($config);
-        $this->config['translations'] = array_merge($this->config['translations'], $this->customTranslations());
     }
 
     /**
@@ -20,8 +21,10 @@ class Config
      */
     private function buildConfig(array $config = [])
     {
+        $this->configFile = realpath(__DIR__ . '/../../config/quran.php');
+
         // Merge our config with user config
-        $result = array_replace_recursive((include realpath(__DIR__.'/../../config/quran.php')), $config);
+        $result = array_replace_recursive((include $this->configFile), $config);
 
         // If function storage_path is exist (laravel), we update the path to laravel's storage path
         if (function_exists('storage_path') && php_sapi_name() !== 'cli') {
@@ -31,7 +34,6 @@ class Config
         }
 
         // Merge translation with custom translation variable
-        
 
         return $result;
     }
@@ -64,37 +66,15 @@ class Config
         return $this->config;
     }
 
-    /**
-     * Set/get custom translation
-     *
-     * @param string $id Translation ID
-     * @return array|void
-     */
-    public function customTranslations($id = null)
+    public function addTranslation($id)
     {
-        $path = $this->config['storage_path'] . '/translation';
-        if (!file_exists($this->config['storage_path'])) {
-            mkdir($this->config['storage_path']);
+        if (in_array($id, $this->config['translations'])) {
+            return;
         }
 
-        if (!file_exists($path)) {
-            touch($path);
-        }
-
-        $file = fopen($path, "a+");
-        $contents = fread($file, filesize($path) ?: 1);
-
-        $customTranslations = array_filter(explode(",", $contents));
-
-        if ($id === null) {
-            fclose($file);
-            return $customTranslations;
-        } else {
-            if(!in_array($id, $customTranslations)){
-                array_push($this->config['translations'], $id);
-                fwrite($file, ",$id");
-                fclose($file);
-            }
-        }
+        $configString = file_get_contents($this->configFile, true);
+        $result = preg_replace('/([\'\"]translations[\'\"]\s+\=\>\s+\[[a-z\"\'\.\,\s]+)/i', "\\1, '$id'", $configString);
+        file_put_contents($this->configFile, $result);
+        array_push($this->config['translations'], $id);
     }
 }

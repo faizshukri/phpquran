@@ -36,24 +36,39 @@ class TranslationAddCommand extends Command
                 InputArgument::OPTIONAL,
                 'Translation to add'
             )
-            ->addUsage('ms.basmeih')
-        ;
+            ->addUsage('ms.basmeih');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $translation = $input->getArgument('translation');
 
-        if($translation === null){
+        if ($translation === null) {
             $this->translationTable($output, $this->allTranslations());
             $output->writeln("<info>Please specify a </info><comment>translation ID</comment><info>. You can refer to the table above.</info>\n");
         } else {
-            $this->config->customTranslations($translation);
-            // dump($this->config->get('translations'));
+            $found = false;
+            $translations = $this->allTranslations();
+            foreach ($translations as $tr) {
+                if ($translation == $tr['id']) {
+                    $found = true;
+                    break;
+                }
+            }
+
+            if (!$found) {
+                $this->translationTable($output, $translations);
+                $output->writeln("<info>Invalid </info><comment>translation ID</comment><info>. Please refer to the available translation above.</info>\n");
+                return 0;
+            }
+
+            $this->config->addTranslation($translation);
             $dw = new Downloader($this->config);
             $dw->sync();
             $output->writeln("<info>$translation</info> has been added successfully.\n");
         }
+
+        return 0;
     }
 
     private function allTranslations()
@@ -67,8 +82,7 @@ class TranslationAddCommand extends Command
         $table = new Table($output);
         $table
             ->setHeaders(['ID', 'Language', 'Name', 'Translator'])
-            ->setRows($translations)
-        ;
+            ->setRows($translations);
         $table->render();
     }
 }
