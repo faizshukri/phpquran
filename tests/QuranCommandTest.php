@@ -2,8 +2,8 @@
 
 use FaizShukri\Quran\Commands\SurahCommand;
 use FaizShukri\Quran\Exceptions\SurahInvalid;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
+use Test\TestCase;
 
 class QuranCommandTest extends TestCase
 {
