@@ -1,5 +1,4 @@
-PHP Quran
-=========
+# PHP Quran
 
 PHP Quran was created by, and is maintained by [Faiz Shukri](https://github.com/faizshukri). This package allow developer to retrieve quran ayah and translation easily.
 
@@ -18,7 +17,7 @@ PHP Quran was created by, and is maintained by [Faiz Shukri](https://github.com/
 
 This project can be installed via [Composer]:
 
-``` bash
+```bash
 $ composer require faizshukri/phpquran
 ```
 
@@ -197,7 +196,7 @@ $ quran surah baqara
 #   Type        Medinan
 #   Order       87
 #   Rukus       40
-#  =========== =========== 
+#  =========== ===========
 
 $ quran surah nas 4
 # No surah found. Did you mean one of the following?
@@ -211,6 +210,14 @@ $ quran surah nas 4
 
 ```
 
+## Contributers
+
+Thanks to the following people and organization for helping out this project;
+
+| Name                                                      | Link                                     |
+| --------------------------------------------------------- | ---------------------------------------- |
+| ![Tanzil](http://tanzil.net/pub/spread/banner/tanzil.png) | [Tanzil.Net](http://tanzil.net)          |
+| Hussaini Zulkifli                                         | [@hussaini](https://github.com/hussaini) |
 
 ## License
 
