@@ -23,13 +23,17 @@ class Config
      */
     private function buildConfig(array $config = [])
     {
-        $this->configFile = realpath(__DIR__ . '/../../config/quran.php');
+        if (function_exists('config_path') && file_exists(config_path('quran.php'))) {
+            $this->configFile = config_path('quran.php');
+        } else {
+            $this->configFile = realpath(__DIR__ . '/../../config/quran.php');
+        }
 
         // Merge our config with user config
         $result = array_replace_recursive((include $this->configFile), $config);
 
         // If function storage_path is exist (laravel), we update the path to laravel's storage path
-        if (function_exists('storage_path') && php_sapi_name() !== 'cli') {
+        if (function_exists('storage_path')) {
             $this->dataDir =  storage_path('app/' . $result['storage_path']);
         } else {
             $this->dataDir =  realpath(__DIR__ . '/../..') . '/' . $result['storage_path'];
