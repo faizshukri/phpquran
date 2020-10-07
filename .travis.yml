@@ -6,6 +6,8 @@ php:
   - 7.3
   - 7.4
 
+dist: xenial
+
 before_script:
   - composer self-update
   - composer install --prefer-source --no-interaction --dev
