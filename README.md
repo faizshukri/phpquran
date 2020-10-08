@@ -1,6 +1,6 @@
 # PHP Quran
 
-PHP Quran was created by, and is maintained by [Faiz Shukri](https://github.com/faizshukri). This package allow developer to retrieve quran ayah and translation easily.
+PHP Quran was created and is maintained by [Faiz Shukri](https://github.com/faizshukri). This package allow developer to retrieve quran ayah and translation easily.
 
 ![PHP Quran](https://lh3.googleusercontent.com/ei0Yeh91ImHyXfdhZs49GYvn9dG_NNrInNAU-q77QzQCHUc2rvYn1yj0WHKB_BEobU7axk9-3bDL=w1200-h500-no)
 
@@ -59,17 +59,17 @@ This will create a `config/quran.php` file in your app that you can modify to se
 
 There are several config options:
 
-**Storage Path**
+##### **Storage Path**
 
 By default, the app will download and store quran files in `storage/app/quran` directory. You may change the value to your own. However the path may be reside under `storage/app` directory.
 
-**Translation**
+##### **Translation**
 
 Specify what translation you want to make available for use. Made sure you have added translation here before use in the code.
 
 ### Console
 
-PHP Quran also ship a binary file to be used in console. If you want to access it anywhere, you can install PHP Quran globally and put your composer global directory path to your working environment's `$PATH`.
+PHP Quran also ship a binary file to be used in console. You can access directly from `vendor/bin/quran`, or if you want to access it from anywhere, you can install PHP Quran globally and put your composer global directory path to your working environment's `$PATH`.
 
 ```bash
 $ composer global require faizshukri/phpquran
@@ -208,6 +208,36 @@ $ quran surah nas 4
 
 مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ
 
+```
+
+#### Translation
+
+Translation can also be configured via console. It will be saved in the configuration file. (run `quran config:path` to see where the file is located).
+
+```bash
+
+$ quran translation:add ms.basmeih
+# Downloading translation ms.basmeih ...
+# ms.basmeih has been added successfully.
+
+$ quran translation:add
+# Please specify a translation ID. You can refer to the table below.
+#
+# +------------+----------+---------------+--------------------+
+# | ID         | Language | Name          | Translator         |
+# +------------+----------+---------------+--------------------+
+# | sq.nahi    | Albanian | Efendi Nahi   | Hasan Efendi Nahi  |
+# | sq.mehdiu  | Albanian | Feti Mehdiu   | Feti Mehdiu        |
+# | sq.ahmeti  | Albanian | Sherif Ahmeti | Sherif Ahmeti      |
+# | ber.mensur | Amazigh  | At Mensur     | Ramdane At Mansour |
+# |                                                            |
+# | .... 113 more translations                                 |
+# +------------+----------+---------------+--------------------+
+
+$ quran translation:list
+# Currently configured translations.
+#   - en.sahih
+#   - ms.basmeih
 ```
 
 ## Contributers
