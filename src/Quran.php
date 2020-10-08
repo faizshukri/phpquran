@@ -16,7 +16,7 @@ class Quran
      *
      * @var string
      */
-    const VERSION = '1.0.0-beta.2';
+    const VERSION = '1.0.0';
 
     private $config;
 
