@@ -33,7 +33,7 @@ class ConfigViewCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln("Config file: <info>{$this->config->configFile}</info>");
-        $output->writeln("Data directory: <info>{$this->config->dataDir}</info>");
+        $output->writeln("Data directory: <info>{$this->config->dataDir}</info>\n");
 
         return 0;
     }

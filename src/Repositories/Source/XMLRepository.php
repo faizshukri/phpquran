@@ -62,7 +62,7 @@ class XMLRepository implements SourceInterface
         }
 
         if ($xmlFile === false) {
-            throw new TranslationNotExists('Translation '.$translation." didn't exists. Please check your config.");
+            throw new TranslationNotExists('Translation \''.$translation."' didn't exists. Add it to config first before use.");
         }
 
         $xml = new XML($xmlFile);

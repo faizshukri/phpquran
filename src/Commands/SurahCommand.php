@@ -106,6 +106,7 @@ class SurahCommand extends Command
             ->setStyle('borderless')
         ;
         $table->render();
+        $output->writeln("");
     }
 
     private function chapters($output)
