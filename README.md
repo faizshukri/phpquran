@@ -59,13 +59,17 @@ This will create a `config/quran.php` file in your app that you can modify to se
 
 There are several config options:
 
-##### **Storage Path**
+1. `storage_path`
 
-By default, the app will download and store quran files in `storage/app/quran` directory. You may change the value to your own. However the path may be reside under `storage/app` directory.
+   By default, the app will download and store quran files in `storage/app/quran` directory. You may change the value to your own. However the path will be reside under `storage/app` directory.
 
-##### **Translation**
+2. `translations`
 
-Specify what translation you want to make available for use. Made sure you have added translation here before use in the code.
+   Specify translations that you want to make available for use. Make sure you add translation here before use in the code.
+
+3. `limit`
+
+   Default limits per query are `15 ayah` and `3 translations`.
 
 ### Console
 
