@@ -32,10 +32,4 @@ interface SourceInterface
      * @return array
      */
     public function translations();
-
-    /**
-     * @param string $translation
-     * @return boolean
-     */
-    public function addTranslation($translation);
 }

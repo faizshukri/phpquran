@@ -32,9 +32,4 @@ class SQLRepository implements SourceInterface
     {
         // TODO: Implement translation() method.
     }
-
-    public function addTranslation($translation)
-    {
-        // TODO: Implement addTranslation() method.
-    }
 }

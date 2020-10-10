@@ -155,9 +155,4 @@ class XMLRepository implements SourceInterface
             array_map(function($a){ return str_replace(".xml", "", $a); }, $translations)
         );
     }
-
-    public function addTranslation($translation)
-    {
-        // TODO: Implement addTranslation() method.
-    }
 }

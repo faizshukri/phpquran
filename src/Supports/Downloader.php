@@ -2,8 +2,6 @@
 
 namespace FaizShukri\Quran\Supports;
 
-use GuzzleHttp\Client;
-
 class Downloader
 {
     private $config;
@@ -19,14 +17,14 @@ class Downloader
 
         // Download quran data
         foreach ($translations as $tr) {
-            $file = $this->config->get('storage_path').'/'.$tr.'.'.$type;
+            $file = $this->config->get('storage_path') . '/' . $tr . '.' . $type;
 
             if (!file_exists($file)) {
                 if (php_sapi_name() === 'cli') {
                     echo "Downloading translation \e[32m$tr\e[0m ...\n";
                 }
 
-                $url = 'http://tanzil.net/trans/?transID='.$tr.'&type='.$type;
+                $url = 'http://tanzil.net/trans/?transID=' . $tr . '&type=' . $type;
                 $this->download($url, $file);
             }
         }
@@ -34,8 +32,15 @@ class Downloader
 
     public function download($url, $destination)
     {
-        $client = new Client();
-        $res = $client->get($url);
-        file_put_contents($destination, $res->getBody());
+        $fp = fopen($destination, 'w+');
+        $ch = curl_init();
+        curl_setopt_array($ch, [
+            CURLOPT_URL => $url,
+            CURLOPT_FILE => $fp,
+            CURLOPT_FOLLOWLOCATION => true
+        ]);
+        curl_exec($ch);
+        curl_close($ch);
+        fclose($fp);
     }
 }
