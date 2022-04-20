@@ -8,7 +8,10 @@ class DownloaderTest extends TestCase
 {
     private $dw;
 
-    protected function setUp()
+    /**
+     * @before
+     */
+    protected function initialize()
     {
         $this->dw = new Downloader(new Config());
     }

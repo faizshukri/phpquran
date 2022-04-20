@@ -7,7 +7,10 @@ class QuranTest extends TestCase
 {
     private $quran;
 
-    protected function setUp()
+    /**
+     * @before
+     */
+    protected function initialize()
     {
         $this->quran = new Quran();
     }

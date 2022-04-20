@@ -148,12 +148,12 @@ class QuranCommandTest extends TestCase
 
         $output = $this->getOutputFromSurahCommand($arguments);
 
-        $this->assertStringContainsString('No surah found. Did you mean one of the following?', $output);
-        $this->assertStringContainsString('Surah Al-Baqara', $output);
-        $this->assertStringContainsString('Index       2', $output);
-        $this->assertStringContainsString('Name        Al-Baqara', $output);
-        $this->assertStringContainsString('Name (ar)   البقرة', $output);
-        $this->assertStringContainsString('Meaning     The Cow', $output);
+        $this->assertStringContainsString2('No surah found. Did you mean one of the following?', $output);
+        $this->assertStringContainsString2('Surah Al-Baqara', $output);
+        $this->assertStringContainsString2('Index       2', $output);
+        $this->assertStringContainsString2('Name        Al-Baqara', $output);
+        $this->assertStringContainsString2('Name (ar)   البقرة', $output);
+        $this->assertStringContainsString2('Meaning     The Cow', $output);
     }
 
     public function test_surah_invalid()

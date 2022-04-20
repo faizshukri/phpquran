@@ -15,13 +15,15 @@ class TestCase extends PHPUnitTestCase
         return \PHPUnit\Runner\Version::id();
     }
 
-    public static function assertStringContainsString($needle, $haystack, $message = '')
+    public static function assertStringContainsString2($needle, $haystack, $message = '')
     {
-        if (version_compare(self::phpunitVersion(), '7.0.0', '<')) {
-            parent::assertContains($needle, $haystack, $message);
+        if (version_compare(self::phpunitVersion(), '6.0.0', '<')) {
+            $constraint = new \PHPUnit_Framework_Constraint_StringContains($needle, false);
         } else {
-            parent::assertStringContainsString($needle, $haystack, $message);
+            $constraint = new \PHPUnit\Framework\Constraint\StringContains($needle, false);
         }
+
+        parent::assertThat($haystack, $constraint, $message);
     }
 
     public static function assertMatchesRegularExpression($pattern, $string, $message = '')
