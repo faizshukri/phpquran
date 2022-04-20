@@ -26,6 +26,10 @@ class Downloader
 
                 $url = 'http://tanzil.net/trans/?transID=' . $tr . '&type=' . $type;
                 $this->download($url, $file);
+
+                if ($type == 'xml') {
+                    $this->cleanXML($file);
+                }
             }
         }
     }
@@ -42,5 +46,17 @@ class Downloader
         curl_exec($ch);
         curl_close($ch);
         fclose($fp);
+    }
+
+    public function cleanXML($file)
+    {
+        $str = file_get_contents($file);
+        $re = '/(^\s*\#.*?(?=-))(-{2,})/m';
+        preg_match($re, $str, $matches);
+
+        $newStr = str_replace('-', '=', $matches[2]);
+        $str = preg_replace($re, '$1' . $newStr, $str);
+
+        file_put_contents($file, $str);
     }
 }
