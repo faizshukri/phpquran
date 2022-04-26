@@ -49,7 +49,7 @@ jobs:
 
       - name: Run test
         run: |
-          if (( ${PHP_VERSION:0:1} < 8 )); then
+          if [[ ${PHP_VERSION:0:1} == "7" ]]; then
             ./vendor/bin/phpunit --whitelist ./src --coverage-text --coverage-clover=coverage.clover
           else
             ./vendor/bin/phpunit --whitelist ./src

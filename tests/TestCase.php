@@ -26,7 +26,7 @@ class TestCase extends PHPUnitTestCase
         parent::assertThat($haystack, $constraint, $message);
     }
 
-    public static function assertMatchesRegularExpression($pattern, $string, $message = '')
+    public static function assertMatchesRegularExpression2($pattern, $string, $message = '')
     {
         if (version_compare(self::phpunitVersion(), '9.0.0', '<')) {
             parent::assertRegExp($pattern, $string);

@@ -96,7 +96,7 @@ class QuranCommandTest extends TestCase
             "\\| 1. Al-Faatiha    \\| 30. Ar-Room       \\| 59. Al-Hashr       \\| 87. Al-A'laa      \\|\n" .
             '\\| 2. Al-Baqara     \\| 31. Luqman        \\| 60. Al-Mumtahana   \\| 88. Al-Ghaashiya  \\|/';
 
-        $this->assertMatchesRegularExpression($expected, $this->getOutputFromSurahCommand([]));
+        $this->assertMatchesRegularExpression2($expected, $this->getOutputFromSurahCommand([]));
     }
 
     public function test_surah_1()
@@ -109,7 +109,7 @@ class QuranCommandTest extends TestCase
             'surah' => '2'
         ];
 
-        $this->assertMatchesRegularExpression($expected, $this->getOutputFromSurahCommand($arguments));
+        $this->assertMatchesRegularExpression2($expected, $this->getOutputFromSurahCommand($arguments));
     }
 
     public function test_surah_2()
@@ -135,7 +135,7 @@ class QuranCommandTest extends TestCase
             'surah' => 'baqara'
         ];
 
-        $this->assertMatchesRegularExpression($expected, $this->getOutputFromSurahCommand($arguments));
+        $this->assertMatchesRegularExpression2($expected, $this->getOutputFromSurahCommand($arguments));
     }
 
     public function test_ask_surah()
