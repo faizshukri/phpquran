@@ -26,6 +26,16 @@ class QuranTest extends TestCase
         $this->assertEquals('ٱلرَّحْمَٰنِ ٱلرَّحِيمِ', $this->quran->get('1:3'));
     }
 
+    public function test_single_ayah_2()
+    {
+        $this->quran = new Quran(['structure' => 'fixed']);
+        $this->assertEquals([
+            'ar' => [
+                3 => 'ٱلرَّحْمَٰنِ ٱلرَّحِيمِ'
+            ]
+        ], $this->quran->get('1:3'));
+    }
+
     public function test_single_ayah_translation()
     {
         $this->assertEquals('The Entirely Merciful, the Especially Merciful,', $this->quran->translation('en.sahih')->get('1:3'));
@@ -52,9 +62,34 @@ class QuranTest extends TestCase
         $this->assertEquals('The Entirely Merciful, the Especially Merciful,', $res['en']);
     }
 
+    public function test_single_ayah_multiple_translation_short_2()
+    {
+        $this->quran = new Quran(['structure' => 'fixed']);
+        $this->assertEquals([
+            'ar' => [
+                3 => 'ٱلرَّحْمَٰنِ ٱلرَّحِيمِ'
+            ],
+            'en' => [
+                3 => 'The Entirely Merciful, the Especially Merciful,'
+            ]
+        ], $this->quran->translation('ar,en')->get('1:3'));
+    }
+
     public function test_multiple_ayah()
     {
         $this->assertCount(3, $this->quran->get('1:3,4,5'));
+    }
+
+    public function test_multiple_ayah_2()
+    {
+        $this->quran = new Quran(['structure' => 'fixed']);
+        $this->assertEquals([
+            'ar' => [
+                3 => 'ٱلرَّحْمَٰنِ ٱلرَّحِيمِ',
+                4 => 'مَٰلِكِ يَوْمِ ٱلدِّينِ',
+                5 => 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ'
+            ]
+        ], $this->quran->get('1:3,4,5'));
     }
 
     public function test_multiple_ayah_multiple_translation()
@@ -63,6 +98,25 @@ class QuranTest extends TestCase
 
         $this->assertCount(3, $res['ar']);
         $this->assertCount(3, $res['en']);
+    }
+
+    public function test_multiple_ayah_multiple_translation_2()
+    {
+        $this->quran = new Quran(['structure' => 'fixed']);
+        $expected = [
+            'ar' => [
+                3 => 'ٱلرَّحْمَٰنِ ٱلرَّحِيمِ',
+                4 => 'مَٰلِكِ يَوْمِ ٱلدِّينِ',
+                5 => 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ'
+            ],
+            'en' => [
+                3 => 'The Entirely Merciful, the Especially Merciful,',
+                4 => 'Sovereign of the Day of Recompense.',
+                5 => 'It is You we worship and You we ask for help.'
+            ]
+        ];
+
+        $this->assertEquals($expected, $this->quran->translation('ar,en')->get('1:3,4,5'));
     }
 
     public function test_range_ayah()

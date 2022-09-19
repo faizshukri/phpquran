@@ -49,16 +49,17 @@ class Config
      * @param string $val Variable name
      * @return array|string Variable value
      */
-    public function get($val)
+    public function get($val, $default = null)
     {
         $configs = explode('.', $val);
-        $first = $this->config[array_shift($configs)];
+        $key = array_shift($configs);
+        $first = isset($this->config[$key]) ? $this->config[$key] : null;
 
         foreach ($configs as $config) {
-            $first = $first[$config];
+            $first = isset($first[$config]) ? $first[$config] : null;
         }
 
-        return $first;
+        return isset($first) ? $first : $default;
     }
 
     /**

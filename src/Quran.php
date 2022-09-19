@@ -68,7 +68,7 @@ class Quran
         }
 
         if (sizeof($translations) > $this->config->get('limit.translation')) {
-            throw new ExceedLimit('Too much translation provided. Your limit is '.$this->config->get('limit.translation').' only.');
+            throw new ExceedLimit('Too much translation provided. Your limit is ' . $this->config->get('limit.translation') . ' only.');
         }
 
         $this->translations = $translations;
@@ -100,7 +100,7 @@ class Quran
         $ayah = $this->parseSurah($args[1]);
 
         if (sizeof($ayah) > $this->config->get('limit.ayah')) {
-            throw new ExceedLimit('Too much ayah provided. Your limit is '.$this->config->get('limit.ayah').' only.');
+            throw new ExceedLimit('Too much ayah provided. Your limit is ' . $this->config->get('limit.ayah') . ' only.');
         }
 
         // Check if Surah and Ayah is in correct format
@@ -113,7 +113,7 @@ class Quran
             $result[$translation] = $this->source->ayah($surah, $ayah, $translation);
         }
 
-        return $this->minimize($result);
+        return $this->config->get('structure', 'minimum') == 'fixed' ? $result : $this->minimize($result);
     }
 
     /**
@@ -138,7 +138,7 @@ class Quran
     {
         $result = [];
 
-        foreach (explode(',', $surah) as $comma) {
+        foreach ((is_array($surah) ? $surah : explode(',', $surah)) as $comma) {
             $dash = explode('-', $comma);
 
             // Skip any invalid ayah

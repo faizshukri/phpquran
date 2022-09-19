@@ -30,9 +30,18 @@ class ConfigTest extends TestCase
         $this->assertEquals('yes', $this->config->get('level1'));
     }
 
+    public function test_get_default()
+    {
+        $this->assertEquals('yes', $this->config->get('level1', 'ya'));
+        $this->assertEquals('ya', $this->config->get('notexist', 'ya'));
+        $this->assertEquals('ya', $this->config->get('level2.notexist', 'ya'));
+        $this->assertEquals('ya', $this->config->get('level2.great.notexist', 'ya'));
+        $this->assertEquals('ya', $this->config->get('level2.notexist.notexist', 'ya'));
+    }
+
     public function test_build_config()
     {
-        $this->assertCount(5, $this->config->all());
+        $this->assertCount(6, $this->config->all());
     }
 
     public function test_get_deep()

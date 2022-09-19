@@ -43,7 +43,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install dependencies
-        run: composer install --prefer-source --no-interaction $(if (( ${PHP_VERSION:0:1} > 7 )); then echo --ignore-platform-reqs; else echo ""; fi)
+        run: composer install --prefer-source --no-interaction
         env:
           PHP_VERSION: ${{ matrix.php-versions }}
 
