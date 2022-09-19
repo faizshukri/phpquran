@@ -700,6 +700,8 @@ class TanzilTranslations
                     return $translation;
                 }
             }
+
+            return null;
         }
 
         return $translations;
