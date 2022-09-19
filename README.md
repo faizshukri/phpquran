@@ -71,6 +71,10 @@ There are several config options:
 
    Default limits per query are `15 ayah` and `3 translations`.
 
+4. `structure`
+
+   Structure of the data. Default is `minimal` which remove all unnecessary parent. `fixed` will make structure more consistent.
+
 ### Console
 
 PHP Quran also ship a binary file to be used in console. You can access directly from `vendor/bin/quran`, or if you want to access it from anywhere, you can install PHP Quran globally and put your composer global directory path to your working environment's `$PATH`.

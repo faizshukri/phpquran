@@ -113,7 +113,7 @@ class Quran
             $result[$translation] = $this->source->ayah($surah, $ayah, $translation);
         }
 
-        return $this->config->get('structure', 'minimum') == 'fixed' ? $result : $this->minimize($result);
+        return $this->config->get('structure', 'minimal') == 'fixed' ? $result : $this->minimize($result);
     }
 
     /**

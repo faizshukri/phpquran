@@ -35,12 +35,12 @@ return [
     |
     | Supported:
     |
-    | "minimum" => Reduce the array level by remove unnecessary parent. (Default)
+    | "minimal" => Reduce the array level by remove unnecessary parent. (Default)
     | "fixed"   => Return fixed array level.
     |
     */
 
-    'structure' => 'minimum',
+    'structure' => 'minimal',
 
     /*
     |--------------------------------------------------------------------------
