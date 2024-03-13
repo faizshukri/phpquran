@@ -59,7 +59,7 @@ class SurahCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $surah = $input->getArgument('surah');
         $ayah = $input->getArgument('ayah');
