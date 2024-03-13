@@ -30,7 +30,7 @@ class ConfigViewCommand extends Command
             ->setDescription('View configuration path');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln("Config file: <info>{$this->config->configFile}</info>");
         $output->writeln("Data directory: <info>{$this->config->dataDir}</info>\n");

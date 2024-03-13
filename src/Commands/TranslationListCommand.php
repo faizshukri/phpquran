@@ -29,7 +29,7 @@ class TranslationListCommand extends Command
             ->setDescription('View available translations');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $translations = $this->translations();
 
